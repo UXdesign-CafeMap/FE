@@ -1,4 +1,4 @@
-package org.techtown.cafemap
+package com.example.cafemap
 
 import org.junit.Test
 

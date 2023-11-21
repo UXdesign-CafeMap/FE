@@ -1,4 +1,4 @@
-package org.techtown.cafemap
+package com.example.cafemap
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

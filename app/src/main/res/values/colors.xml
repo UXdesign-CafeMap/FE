@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="BR_100">#4DDFD7CD</color>
+    <color name="BR_200">#FF976F47</color>
+    <color name="BR_300">#FF7B5836</color>
+    <color name="BR_400">#FF422A14</color>
+
+    <color name="SUB_200">#FFE9E9E9</color>
+    <color name="SUB_400">#FF785D44</color>
+    <color name="SUB_600">#FF492C10</color>
+    <color name="SUB_800">#FF2E1905</color>
+
+    <color name="DENS_FFF">#FFBBBBBB</color>
+    <color name="DENS_100">#FFB99976</color>
+    <color name="DENS_200">#FF976F47</color>
+    <color name="DENS_300">#FF6C4C2D</color>
+    <color name="DENS_400">#FF422A14</color>
+
+    <color name="BK">#FF000000</color>
+    <color name="WH">#FFFFFFFF</color>
 </resources>

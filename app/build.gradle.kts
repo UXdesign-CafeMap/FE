@@ -5,10 +5,10 @@ plugins {
 
 android {
     namespace = "org.techtown.cafemap"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = "org.techtown.cafemap"
+        applicationId = "com.example.cafemap"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
