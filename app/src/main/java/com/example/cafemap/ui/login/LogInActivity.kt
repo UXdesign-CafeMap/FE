@@ -1,4 +1,6 @@
 package com.example.cafemap.ui.login
 
-class LogInActivity {
+import androidx.appcompat.app.AppCompatActivity
+
+class LogInActivity : AppCompatActivity() {
 }

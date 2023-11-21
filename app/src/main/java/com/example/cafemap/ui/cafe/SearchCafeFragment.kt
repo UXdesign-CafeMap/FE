@@ -1,4 +1,6 @@
 package com.example.cafemap.ui.cafe
 
-class SearchCafeFragment {
+import androidx.fragment.app.Fragment
+
+class SearchCafeFragment : Fragment() {
 }

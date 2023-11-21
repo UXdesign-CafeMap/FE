@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_home">
+
+    <activity
+        android:id="@+id/navigation_log_in"
+        android:name="com.example.cafemap.ui.login.LogInActivity"
+        android:label="Log In"
+        tools:layout="@layout/activity_log_in" />
+
+    <activity
+        android:id="@+id/navigation_sign_up"
+        android:name="com.example.cafemap.ui.login.SignUpActivity"
+        android:label="Sign Up"
+        tools:layout="@layout/activity_sign_up" />
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.cafemap.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_search_cafe"
+        android:name="com.example.cafemap.ui.cafe.SearchCafeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+
+    <activity
+        android:id="@+id/navigation_cafe_detail"
+        android:name="com.example.cafemap.ui.cafe.CafeDetailActivity"
+        android:label="Cafe Detail"
+        tools:layout="@layout/activity_cafe_detail" />
+
+    <activity
+        android:id="@+id/navigation_review_list"
+        android:name="com.example.cafemap.ui.cafe.ReviewListActivity"
+        android:label="Review List"
+        tools:layout="@layout/activity_review_list" />
+
+    <fragment
+        android:id="@+id/navigation_my_page"
+        android:name="com.example.cafemap.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+
+</navigation>

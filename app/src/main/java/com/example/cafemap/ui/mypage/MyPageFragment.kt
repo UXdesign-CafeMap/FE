@@ -1,4 +1,6 @@
 package com.example.cafemap.ui.mypage
 
-class MyPageFragment {
+import androidx.fragment.app.Fragment
+
+class MyPageFragment : Fragment() {
 }

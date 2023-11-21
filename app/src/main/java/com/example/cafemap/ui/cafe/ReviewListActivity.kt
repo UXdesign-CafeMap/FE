@@ -1,4 +1,6 @@
 package com.example.cafemap.ui.cafe
 
-class ReviewListActivity {
+import androidx.appcompat.app.AppCompatActivity
+
+class ReviewListActivity : AppCompatActivity() {
 }
