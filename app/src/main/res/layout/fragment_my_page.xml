@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/WH"
+    android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 프로필 이미지 영역 -->
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/profile_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"/>
+
+    <!--사용자 이름-->
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="김건국"
+        android:fontFamily="@font/gothic_regular"
+        android:textSize="28sp"
+        android:textColor="@color/BK"
+        android:textStyle="bold"/>
+
+    <!--사용자 이메일-->
+    <TextView
+        android:id="@+id/user_email"
+        android:layout_width="286dp"
+        android:layout_height="51dp"
+        android:layout_below="@id/user_name"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/background_box"
+        android:text="cafe.joa@konkuk.ac.kr"
+        android:fontFamily="@font/gothic_light"
+        android:textSize="20sp"
+        android:textColor="@color/SUB_600"/>
+
+    <!--로그아웃 버튼-->
+    <!-- 그림자 적용해야 함 -->
+    <Button
+        android:id="@+id/logout_button"
+        android:text="로그아웃"
+        android:background="@drawable/background_radius"
+        android:layout_width="286dp"
+        android:layout_height="51dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="405dp"
+        android:fontFamily="@font/gothic_regular"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"/>
+
+    <!-- 탈퇴 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_marginTop="480dp">
+
+        <TextView
+            android:id="@+id/withdraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카페스캐너 그만 이용하기"
+            android:fontFamily="@font/gothic_regular"
+            android:textSize="16sp"
+            android:textColor="@color/SUB_400"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
+
+    <!-- 하단 네비게이션바 만들어야 함 -->
+
+</RelativeLayout>

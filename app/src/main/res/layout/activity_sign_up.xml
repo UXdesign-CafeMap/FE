@@ -8,10 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- 가입 안내 텍스트 -->
-        <TextView
-            android:layout_width=""
-            android:layout_height=""
+        <!-- 가입 안내 -->
+        <ImageView
+            android:src="@drawable/signup_image"
+            android:layout_width="228dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"/>
 
         <!-- 이메일 입력 필드 -->
         <EditText
@@ -27,8 +30,7 @@
             android:background="@drawable/background_box"
             android:fontFamily="@font/gothic_regular"
             android:textSize="16sp"
-            android:textColorHint="@color/SUB_400"
-            />
+            android:textColorHint="@color/SUB_400"/>
 
         <!-- 비밀번호 입력 필드 -->
         <EditText
@@ -44,8 +46,7 @@
             android:background="@drawable/background_box"
             android:fontFamily="@font/gothic_regular"
             android:textSize="16sp"
-            android:textColorHint="@color/SUB_400"
-            />
+            android:textColorHint="@color/SUB_400"/>
 
         <!-- 비밀번호 재입력 필드 -->
         <EditText
@@ -61,12 +62,12 @@
             android:background="@drawable/background_box"
             android:fontFamily="@font/gothic_regular"
             android:textSize="16sp"
-            android:textColorHint="@color/SUB_400"
-            />
+            android:textColorHint="@color/SUB_400"/>
 
         <!-- 회원가입 버튼 -->
         <!-- 그림자 적용해야 함 -->
         <Button
+            android:id="@+id/signup_button"
             android:text="회원가입"
             android:background="@drawable/background_radius"
             android:layout_width="286dp"
@@ -76,8 +77,7 @@
             android:layout_marginTop="439dp"
             android:fontFamily="@font/gothic_regular"
             android:textSize="20sp"
-            android:textColor="@android:color/white"
-            />
+            android:textColor="@android:color/white"/>
 
     </RelativeLayout>
 
