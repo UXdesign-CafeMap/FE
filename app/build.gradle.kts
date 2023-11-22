@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "org.techtown.cafemap"
+    namespace = "com.example.cafemap"
     compileSdk = 34
 
     defaultConfig {
