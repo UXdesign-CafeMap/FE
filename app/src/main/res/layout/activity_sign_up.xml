@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 가입 안내 텍스트 -->
+        <TextView
+            android:layout_width=""
+            android:layout_height=""
+
+        <!-- 이메일 입력 필드 -->
+        <EditText
+            android:id="@+id/email"
+            android:hint="이메일 주소"
+            android:layout_width="286dp"
+            android:layout_height="51dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="257dp"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="20dp"
+            android:background="@drawable/background_box"
+            android:fontFamily="@font/gothic_regular"
+            android:textSize="16sp"
+            android:textColorHint="@color/SUB_400"
+            />
+
+        <!-- 비밀번호 입력 필드 -->
+        <EditText
+            android:id="@+id/password"
+            android:hint="영문, 숫자 포함 10자 이상"
+            android:layout_width="286dp"
+            android:layout_height="51dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="314dp"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:background="@drawable/background_box"
+            android:fontFamily="@font/gothic_regular"
+            android:textSize="16sp"
+            android:textColorHint="@color/SUB_400"
+            />
+
+        <!-- 비밀번호 재입력 필드 -->
+        <EditText
+            android:id="@+id/checkPassword"
+            android:hint="비밀번호 재입력"
+            android:layout_width="286dp"
+            android:layout_height="51dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="370dp"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:background="@drawable/background_box"
+            android:fontFamily="@font/gothic_regular"
+            android:textSize="16sp"
+            android:textColorHint="@color/SUB_400"
+            />
+
+        <!-- 회원가입 버튼 -->
+        <!-- 그림자 적용해야 함 -->
+        <Button
+            android:text="회원가입"
+            android:background="@drawable/background_radius"
+            android:layout_width="286dp"
+            android:layout_height="51dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="439dp"
+            android:fontFamily="@font/gothic_regular"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,6 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 로고 -->
+        <ImageView
+            android:src="@drawable/logo_image"
+            android:layout_width="189dp"
+            android:layout_height="42dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"
+            />
+
+        <!-- 이메일 입력 필드 -->
+        <EditText
+            android:id="@+id/email"
+            android:hint="이메일 주소"
+            android:layout_width="286dp"
+            android:layout_height="51dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="257dp"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="20dp"
+            android:background="@drawable/background_box"
+            android:fontFamily="@font/gothic_regular"
+            android:textSize="16sp"
+            android:textColorHint="@color/SUB_400"
+            />
+
+        <!-- 비밀번호 입력 필드 -->
+        <EditText
+            android:id="@+id/password"
+            android:hint="비밀번호"
+            android:layout_width="286dp"
+            android:layout_height="51dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="314dp"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:background="@drawable/background_box"
+            android:fontFamily="@font/gothic_regular"
+            android:textSize="16sp"
+            android:textColorHint="@color/SUB_400"
+            />
+
+        <!-- 로그인 버튼 -->
+        <!-- 그림자 적용해야 함 -->
+        <Button
+            android:text="로그인"
+            android:background="@drawable/background_radius"
+            android:layout_width="286dp"
+            android:layout_height="51dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="383dp"
+            android:fontFamily="@font/gothic_regular"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            />
+
+        <!-- 아이디 찾기, 비밀번호 찾기, 회원가입 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_marginTop="455dp">
+
+            <TextView
+                android:id="@+id/find_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아이디 찾기"
+                android:fontFamily="@font/gothic_regular"
+                android:textSize="16sp"
+                android:textColor="@color/SUB_800"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingRight="12dp" />
+
+            <View
+                android:id="@+id/line_find_id"
+                android:layout_width="1dp"
+                android:layout_height="16dp"
+                android:background="@color/SUB_800" />
+
+            <TextView
+                android:id="@+id/find_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="비밀번호 찾기"
+                android:fontFamily="@font/gothic_regular"
+                android:textSize="16sp"
+                android:textColor="@color/SUB_800"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp" />
+
+            <View
+                android:id="@+id/line_find_password"
+                android:layout_width="1dp"
+                android:layout_height="16dp"
+                android:background="@color/SUB_800" />
+
+            <TextView
+                android:id="@+id/signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원가입"
+                android:fontFamily="@font/gothic_regular"
+                android:textSize="16sp"
+                android:textColor="@color/SUB_800"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingLeft="12dp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
