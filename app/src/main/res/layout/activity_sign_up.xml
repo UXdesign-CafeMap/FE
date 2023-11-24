@@ -27,7 +27,7 @@
             android:layout_marginTop="257dp"
             android:inputType="textEmailAddress"
             android:paddingLeft="20dp"
-            android:background="@drawable/background_box"
+            android:background="@drawable/background_br100"
             android:fontFamily="@font/gothic_regular"
             android:textSize="16sp"
             android:textColorHint="@color/SUB_400"/>
@@ -43,7 +43,7 @@
             android:layout_marginTop="314dp"
             android:inputType="textPassword"
             android:paddingLeft="20dp"
-            android:background="@drawable/background_box"
+            android:background="@drawable/background_br100"
             android:fontFamily="@font/gothic_regular"
             android:textSize="16sp"
             android:textColorHint="@color/SUB_400"/>
@@ -59,19 +59,18 @@
             android:layout_marginTop="370dp"
             android:inputType="textPassword"
             android:paddingLeft="20dp"
-            android:background="@drawable/background_box"
+            android:background="@drawable/background_br100"
             android:fontFamily="@font/gothic_regular"
             android:textSize="16sp"
             android:textColorHint="@color/SUB_400"/>
 
         <!-- 회원가입 버튼 -->
-        <!-- 그림자 적용해야 함 -->
         <Button
             android:id="@+id/signup_button"
             android:text="회원가입"
-            android:background="@drawable/background_radius"
+            android:background="@drawable/background_br400"
             android:layout_width="286dp"
-            android:layout_height="51dp"
+            android:layout_height="55dp"
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="439dp"
