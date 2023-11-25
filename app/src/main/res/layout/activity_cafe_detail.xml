@@ -306,7 +306,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/graph_bar"/>
+                    android:src="@drawable/ic_graph_bar"/>
 
             </androidx.cardview.widget.CardView>
 

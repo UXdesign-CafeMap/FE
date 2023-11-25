@@ -1,6 +1,31 @@
 package com.example.cafemap.ui.cafe
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import com.example.cafemap.R
+import com.example.cafemap.databinding.FragmentSearchCafeBinding
 
 class SearchCafeFragment : Fragment() {
+
+    private lateinit var binding: FragmentSearchCafeBinding
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val rootView = inflater.inflate(R.layout.fragment_search_cafe, container, false)
+
+        val searchView = rootView.findViewById<SearchView>(R.id.sv_home)
+        val searchIconId = searchView.context.resources
+            .getIdentifier("android:id/search_mag_icon", null, null)
+        val searchIcon = searchView.findViewById<ImageView>(searchIconId)
+        searchIcon.visibility = View.INVISIBLE
+
+        return rootView
+    }
 }
