@@ -6,4 +6,11 @@
     </style>
 
     <style name="Theme.CafeMap" parent="Base.Theme.CafeMap" />
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColorHint">@color/SUB_400</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/gothic_light</item>
+        <item name="android:layoutDirection">rtl</item>
+    </style>
 </resources>
