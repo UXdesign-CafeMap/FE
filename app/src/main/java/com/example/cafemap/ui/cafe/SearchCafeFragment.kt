@@ -49,9 +49,6 @@ class SearchCafeFragment : Fragment() {
 //                }
 //            })
 
-        val searchView = root.findViewById<androidx.appcompat.widget.SearchView>(R.id.sv_home)
-        searchView.setIconifiedByDefault(false)
-        searchView.isSubmitButtonEnabled = false;
 
         return root
     }
