@@ -36,6 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_rl_cafe_name"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_rl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="4dp"

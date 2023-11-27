@@ -7,6 +7,16 @@ import com.example.cafemap.databinding.ItemSearchCafeListBinding
 
 class SearchCafeAdapter(var items : List<String>) : RecyclerView.Adapter<SearchCafeAdapter.ViewHolder>() {
 
+    interface OnItemClickListener {
+        fun onItemClicked(cafeId: Int)
+    }
+
+    private var onItemClickListener : OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        onItemClickListener = listener
+    }
+
     inner class ViewHolder(val binding: ItemSearchCafeListBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : String) {
 //            binding.root.setOnClickListener {
