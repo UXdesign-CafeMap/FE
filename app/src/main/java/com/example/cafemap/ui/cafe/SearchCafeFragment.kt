@@ -16,7 +16,6 @@ class SearchCafeFragment : Fragment() {
 
     private var _binding: FragmentSearchCafeBinding? = null
     private val binding get() = _binding!!
-
     private val searchCafes = SearchCafeViewModel()
 
     override fun onCreateView(

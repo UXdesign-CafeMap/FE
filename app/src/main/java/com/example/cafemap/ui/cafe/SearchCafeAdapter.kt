@@ -7,11 +7,11 @@ import com.example.cafemap.databinding.ItemSearchCafeListBinding
 
 class SearchCafeAdapter(var items : List<String>) : RecyclerView.Adapter<SearchCafeAdapter.ViewHolder>() {
 
+    private var onItemClickListener : OnItemClickListener? = null
+
     interface OnItemClickListener {
         fun onItemClicked(cafeId: Int)
     }
-
-    private var onItemClickListener : OnItemClickListener? = null
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         onItemClickListener = listener
@@ -19,16 +19,23 @@ class SearchCafeAdapter(var items : List<String>) : RecyclerView.Adapter<SearchC
 
     inner class ViewHolder(val binding: ItemSearchCafeListBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : String) {
-//            binding.root.setOnClickListener {
-//                itemClickListener!!.onItemClicked(item.challengeId)
-//            }
+            binding.root.setOnClickListener {
+//                onItemClickListener!!.onItemClicked(item.cafeId)
+            }
+
 
 //            binding.tvMcTitle.text = item.contents.title
 //            binding.tvItemMyChallengePercent.text = (item.progressRate * 100).toInt().toString() + "%"
 //            binding.cvMcProgress.layoutParams.width = (360 * item.progressRate).toInt()
 
-        }
+//            val layoutParams = binding.cvMcProgress.layoutParams
+//            layoutParams.width = (binding.cvMcBackProgress.layoutParams.width * item.progressRate).toInt()
+//            binding.cvMcProgress.layoutParams = layoutParams
 
+//            // 레이아웃을 다시 요청
+//            binding.cvMcProgress.requestLayout()
+
+        }
     }
 
     override fun onCreateViewHolder(

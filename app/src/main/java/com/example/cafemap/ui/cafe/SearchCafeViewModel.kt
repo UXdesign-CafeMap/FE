@@ -14,4 +14,9 @@ class SearchCafeViewModel : ViewModel() {
         list = arrayListOf()
         _itemList.value = list
     }
+
+    fun setSearchCafe(cList: ArrayList<String>) {
+        list = cList
+        _itemList.value = list
+    }
 }
