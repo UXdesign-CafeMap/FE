@@ -49,7 +49,6 @@ class SearchCafeFragment : Fragment() {
 //                }
 //            })
 
-
         return root
     }
 }
