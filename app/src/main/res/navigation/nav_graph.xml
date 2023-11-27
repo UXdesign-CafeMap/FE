@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/navigation_my_page"
-        android:name="com.example.cafemap.ui.home.HomeFragment"
+        android:name="com.example.cafemap.ui.mypage.MyPageFragment"
         android:label="My Page"
         tools:layout="@layout/fragment_my_page" />
 
