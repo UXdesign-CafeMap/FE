@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-val BASE_URL = BuildConfig.BASE_URL
+val BASE_URL = "https://api.github.com/"
 
 object RetrofitUtil {
     private var instance: RetrofitInterface? = null
