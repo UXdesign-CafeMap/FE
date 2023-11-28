@@ -5,6 +5,7 @@ import com.example.cafemap.R
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cafemap.MainActivity
@@ -17,6 +18,9 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var passwordEditText: EditText
     private lateinit var signInButton: Button
     private lateinit var userService: AuthService
+    private lateinit var findIdTextButton: TextView
+    private lateinit var findPasswordTextButton: TextView
+    private lateinit var signUpTextButton: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +31,9 @@ class SignInActivity : AppCompatActivity() {
         emailEditText = findViewById<EditText>(R.id.et_li_email)
         passwordEditText = findViewById<EditText>(R.id.et_li_password)
         signInButton = findViewById<Button>(R.id.bt_li_sign_in)
+        findIdTextButton = findViewById(R.id.bt_li_find_id)
+        findPasswordTextButton = findViewById(R.id.bt_li_find_password)
+        signUpTextButton = findViewById(R.id.bt_li_signup)
 
         signInButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
@@ -36,6 +43,11 @@ class SignInActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             performSignIn(email, password)
+        }
+
+        signUpTextButton.setOnClickListener {
+            val signUpIntent = Intent(this@SignInActivity, SignUpActivity::class.java)
+            startActivity(signUpIntent)
         }
     }
 
