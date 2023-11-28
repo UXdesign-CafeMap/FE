@@ -42,7 +42,7 @@ class SignInActivity : AppCompatActivity() {
             if (!isInputValid(email, password)) {
                 return@setOnClickListener
             }
-            performSignIn(email, password)
+//            performSignIn(email, password)
         }
 
         signUpTextButton.setOnClickListener {
@@ -58,16 +58,16 @@ class SignInActivity : AppCompatActivity() {
         return true
     }
 
-    private fun performSignIn(email: String, password: String) {
-        userService.signIn(email, password){ isSuccess ->
-            if (isSuccess) {
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                val mainIntent = Intent(this@SignInActivity, MainActivity::class.java)
-                startActivity(mainIntent)
+//    private fun performSignIn(email: String, password: String) {
+//        userService.signIn(email, password){ isSuccess ->
+//            if (isSuccess) {
+//                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+//                val mainIntent = Intent(this@SignInActivity, MainActivity::class.java)
+//                startActivity(mainIntent)
 
-            } else {
-                Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
+//            } else {
+//                Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
 }
