@@ -24,10 +24,10 @@ class SignUpActivity : AppCompatActivity() {
         userService = UserService();
 
         // UI 요소 연결
-        emailEditText = findViewById(R.id.email)
-        passwordEditText = findViewById(R.id.password)
-        checkPasswordEditText = findViewById(R.id.checkPassword)
-        signUpButton = findViewById(R.id.signup_button)
+        emailEditText = findViewById(R.id.et_su_email)
+        passwordEditText = findViewById(R.id.et_su_password)
+        checkPasswordEditText = findViewById(R.id.et_su_password_again)
+        signUpButton = findViewById(R.id.bt_li_login_button)
 
         // 회원가입 버튼 클릭 이벤트 처리
         signUpButton.setOnClickListener {
