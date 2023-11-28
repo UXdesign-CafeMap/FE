@@ -7,7 +7,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cafemap.R
-import com.example.cafemap.api.RetrofitClient
 import com.example.cafemap.api.service.UserService
 class SignUpActivity : AppCompatActivity() {
 
@@ -21,7 +20,7 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        userService = UserService();
+        userService = UserService;
 
         // UI 요소 연결
         emailEditText = findViewById(R.id.et_su_email)
