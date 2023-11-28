@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserService {
+object UserService {
     private val userRepository = RetrofitClient.userRepository
     fun getUser(userId: String) {
         // userApiService 사용...
