@@ -1,8 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.cafe.PostReviewActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="101dp">
+
+        <!-- 뒤로가기 버튼 넣어야함 -->
+
+        <TextView
+            android:text="카페온더플랜 건대점"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gothic_bold"
+            android:textSize="24sp"
+            android:textColor="@color/BR_400"
+            android:gravity="center"
+            android:layout_marginTop="50dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="101dp"
+        android:background="@color/BR_300"/>
+
+    <!-- 사진 추가 버튼 -->
+    <ImageView
+        android:id="@+id/add_photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/add_photo_btn"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="126dp"/>
+
+    <!-- 리뷰 텍스트 입력 영역 -->
+    <EditText
+        android:id="@+id/review_text"
+        android:layout_width="match_parent"
+        android:layout_height="182dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:hint="이곳에 다녀온 경험을 자세히 공유해 주세요."
+        android:fontFamily="@font/gothic_light"
+        android:textSize="16sp"
+        android:textColorHint="@color/SUB_400"
+        android:background="@drawable/background_br100"
+        android:inputType="textMultiLine"
+        android:gravity="top|start"
+        android:maxLength="1000"
+        android:padding="22dp"/>
+
+    <!-- 글자 수 표시 -->
+    <TextView
+        android:id="@+id/text_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/review_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="26dp"
+        android:text="0 / 1000"
+        android:fontFamily="@font/gothic_light"
+        android:textSize="16sp"
+        android:textColor="@color/SUB_400"
+        />
+
+    <!-- 등록하기 버튼-->
+    <Button
+        android:id="@+id/submit_button"
+        android:text="등록하기"
+        android:background="@drawable/background_br400"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/gothic_regular"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"/>
+
+</RelativeLayout>
