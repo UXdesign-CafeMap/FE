@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.login.SignUpActivity">
-
+    tools:context=".ui.auth.SignUpActivity">
         <!-- 가입 안내 -->
         <TextView
             android:id="@+id/tv_su_label"
@@ -21,7 +20,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
-
         <!-- 이메일 입력 필드 -->
         <EditText
             android:id="@+id/et_su_email"
@@ -57,8 +55,6 @@
             android:fontFamily="@font/gothic_regular"
             android:textSize="16dp"
             android:textColorHint="@color/SUB_400"/>
-
-
     <!-- 비밀번호 재입력 필드 -->
         <EditText
             android:id="@+id/et_su_password_again"
@@ -76,10 +72,9 @@
             android:fontFamily="@font/gothic_regular"
             android:textSize="16dp"
             android:textColorHint="@color/SUB_400"/>
-
         <!-- 회원가입 버튼 -->
         <Button
-            android:id="@+id/bt_li_login_button"
+            android:id="@+id/bt_li_sign_up_button"
             android:text="회원가입"
             android:background="@drawable/background_br400"
             android:layout_width="match_parent"
@@ -91,6 +86,4 @@
             android:fontFamily="@font/gothic_regular"
             android:textSize="20sp"
             android:textColor="@android:color/white"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

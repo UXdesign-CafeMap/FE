@@ -1,6 +1,6 @@
 package com.example.cafemap.api
 
-import com.example.cafemap.api.repository.UserRepository
+import com.example.cafemap.api.repository.AuthRepository
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -8,7 +8,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 // RetrofitClient.kt
 object RetrofitClient {
-    private const val BASE_URL = "https://15.165.63.107:9000"
+    private const val BASE_URL = "http://15.165.63.107:9000"
+
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
@@ -25,7 +26,7 @@ object RetrofitClient {
             .build()
     }
 
-    val userRepository: UserRepository by lazy {
-        retrofit.create(UserRepository::class.java)
+    val authRepository: AuthRepository by lazy {
+        retrofit.create(AuthRepository::class.java)
     }
 }

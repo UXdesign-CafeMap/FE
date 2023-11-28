@@ -1,4 +1,4 @@
-package com.example.cafemap.ui.login
+package com.example.cafemap.ui.auth
 
 import android.os.Bundle
 import android.util.Patterns.EMAIL_ADDRESS
@@ -7,28 +7,26 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cafemap.R
-import com.example.cafemap.api.service.UserService
+import com.example.cafemap.api.service.AuthService
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var checkPasswordEditText: EditText
     private lateinit var signUpButton: Button
-    private lateinit var userService: UserService
+    private lateinit var userService: AuthService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        userService = UserService;
+        userService = AuthService
 
-        // UI 요소 연결
         emailEditText = findViewById(R.id.et_su_email)
         passwordEditText = findViewById(R.id.et_su_password)
         checkPasswordEditText = findViewById(R.id.et_su_password_again)
-        signUpButton = findViewById(R.id.bt_li_login_button)
+        signUpButton = findViewById(R.id.bt_li_sign_up_button)
 
-        // 회원가입 버튼 클릭 이벤트 처리
         signUpButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
@@ -63,14 +61,12 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun performSignUp(email: String, password: String) {
-        // 서버에 회원가입 요청을 보내는 코드
-        // 예: Retrofit을 사용한 네트워크 요청
-        userService.signUp(email, password) { isSuccess, message ->
+        userService.signUp(email, password) { isSuccess ->
             if (isSuccess) {
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
             }
         }
     }

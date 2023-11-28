@@ -6,14 +6,14 @@
     app:startDestination="@id/navigation_home">
 
     <activity
-        android:id="@+id/navigation_log_in"
-        android:name="com.example.cafemap.ui.login.LogInActivity"
+        android:id="@+id/navigation_sign_in"
+        android:name="com.example.cafemap.ui.auth.SignInActivity"
         android:label="Log In"
-        tools:layout="@layout/activity_log_in" />
+        tools:layout="@layout/activity_sign_in" />
 
     <activity
         android:id="@+id/navigation_sign_up"
-        android:name="com.example.cafemap.ui.login.SignUpActivity"
+        android:name="com.example.cafemap.ui.auth.SignUpActivity"
         android:label="Sign Up"
         tools:layout="@layout/activity_sign_up" />
 
