@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "org.techtown.cafemap"
+    namespace = "com.example.cafemap"
     compileSdk = 34
 
     defaultConfig {
@@ -32,6 +32,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    viewBinding {
+        enable = true
     }
 }
 

@@ -1,83 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/WH"
-    android:padding="16dp">
+    tools:context=".ui.mypage.MyPageFragment"
+    android:layout_marginBottom="60dp">
 
     <!-- 프로필 이미지 영역 -->
     <ImageView
-        android:id="@+id/profile_image"
+        android:id="@+id/iv_mp_profile_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/profile_image"
-        android:layout_centerHorizontal="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="80dp"/>
 
     <!--사용자 이름-->
     <TextView
-        android:id="@+id/user_name"
+        android:id="@+id/tv_mp_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="23dp"
         android:text="김건국"
-        android:fontFamily="@font/gothic_regular"
-        android:textSize="28sp"
-        android:textColor="@color/BK"
-        android:textStyle="bold"/>
+        app:layout_constraintTop_toBottomOf="@+id/iv_mp_profile_image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:fontFamily="@font/gothic_bold"
+        android:textSize="28dp"
+        android:textColor="@color/BK"/>
 
     <!--사용자 이메일-->
     <TextView
-        android:id="@+id/user_email"
+        android:id="@+id/tv_mp_user_email"
         android:layout_width="286dp"
         android:layout_height="51dp"
-        android:layout_below="@id/user_name"
-        android:layout_centerHorizontal="true"
+        app:layout_constraintTop_toBottomOf="@id/tv_mp_user_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:gravity="center"
         android:layout_marginTop="22dp"
         android:background="@drawable/background_br100"
         android:text="cafe.joa@konkuk.ac.kr"
         android:fontFamily="@font/gothic_light"
-        android:textSize="20sp"
+        android:textSize="20dp"
         android:textColor="@color/SUB_600"/>
 
     <!--로그아웃 버튼-->
     <Button
-        android:id="@+id/logout_button"
+        android:id="@+id/bt_mp_logout_button"
         android:text="로그아웃"
         android:background="@drawable/background_br400"
-        android:layout_width="286dp"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="405dp"
-        android:fontFamily="@font/gothic_regular"
-        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_mp_user_email"
+        android:layout_marginTop="52dp"
+        android:layout_marginHorizontal="44dp"
+        android:paddingVertical="15dp"
+        android:fontFamily="@font/gothic_bold"
+        android:textSize="20dp"
         android:textColor="@android:color/white"/>
 
     <!-- 탈퇴 -->
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/withdraw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:padding="10dp"
-        android:layout_marginTop="480dp">
-
-        <TextView
-            android:id="@+id/withdraw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="카페스캐너 그만 이용하기"
-            android:fontFamily="@font/gothic_regular"
-            android:textSize="16sp"
-            android:textColor="@color/SUB_400"
-            android:clickable="true"
-            android:focusable="true"/>
-    </LinearLayout>
+        android:text="카페스캐너 그만 이용하기"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/bt_mp_logout_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:fontFamily="@font/gothic_regular"
+        android:textSize="16dp"
+        android:textColor="@color/SUB_400"
+        android:clickable="true"
+        android:focusable="true"/>
 
     <!-- 하단 네비게이션바 만들어야 함 -->
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
