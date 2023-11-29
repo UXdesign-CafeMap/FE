@@ -60,13 +60,21 @@ class SignInActivity : AppCompatActivity() {
 
     private fun performSignIn(email: String, password: String) {
         authService.signIn(email, password
-            , onSuccess = {
+            , onSuccess = { data ->
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+
+                // SharedPreferences를 사용하여 사용자 ID 저장
+                val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.putString("memberId", data.memberId.toString())
+                editor.apply()
+
                 val mainIntent = Intent(this@SignInActivity, MainActivity::class.java)
                 startActivity(mainIntent)
             }
             , onFailure = {
                 Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
+                // XXX: 로그인 api 구현하면 intent 빼야함
                 val mainIntent = Intent(this@SignInActivity, MainActivity::class.java)
                 startActivity(mainIntent)
             }

@@ -15,13 +15,13 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var passwordEditText: EditText
     private lateinit var passwordCheckEditText: EditText
     private lateinit var signUpButton: Button
-    private lateinit var userService: AuthService
+    private lateinit var authService: AuthService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        userService = AuthService
+        authService = AuthService
 
         emailEditText = findViewById(R.id.et_su_email)
         passwordEditText = findViewById(R.id.et_su_password)
@@ -64,12 +64,12 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun performSignUp(email: String, password: String) {
-        userService.signUp(email, password,
-            onSuccess = {
+        authService.signUp(email, password,
+            onSuccess = { data ->
                 Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                // 회원가입 성공 시 로그인 화면으로 이동
-                val SignInIntent = Intent(this@SignUpActivity, SignInActivity::class.java)
-                startActivity(SignInIntent)
+                // 로그인 화면으로 이동
+                val signInIntent = Intent(this@SignUpActivity, SignInActivity::class.java)
+                startActivity(signInIntent)
             },
             onFailure = {
                 Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
