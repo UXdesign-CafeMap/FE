@@ -10,17 +10,26 @@
         android:layout_width="match_parent"
         android:layout_height="101dp">
 
-        <!-- 뒤로가기 버튼 넣어야함 -->
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/back_btn"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="47dp"/>
 
         <TextView
             android:text="카페온더플랜 건대점"
-            android:layout_width="match_parent"
+            android:layout_width="323dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/gothic_bold"
-            android:textSize="24sp"
-            android:textColor="@color/BR_400"
             android:gravity="center"
-            android:layout_marginTop="50dp"/>
+            android:textColor="@color/BR_400"
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -32,23 +41,23 @@
     <!-- 사진 추가 버튼 -->
     <ImageView
         android:id="@+id/add_photo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/add_photo_btn"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="126dp"/>
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="132dp"/>
 
     <!-- 리뷰 텍스트 입력 영역 -->
     <EditText
         android:id="@+id/review_text"
-        android:layout_width="match_parent"
+        android:layout_width="321dp"
         android:layout_height="182dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="280dp"
         android:layout_marginLeft="26dp"
         android:layout_marginRight="26dp"
-        android:hint="이곳에 다녀온 경험을 자세히 공유해 주세요."
+        android:hint="이곳에 다녀온 경험을 공유해 주세요."
         android:fontFamily="@font/gothic_light"
         android:textSize="16sp"
         android:textColorHint="@color/SUB_400"
@@ -58,7 +67,7 @@
         android:maxLength="1000"
         android:padding="22dp"/>
 
-    <!-- 글자 수 표시 -->
+<!--    &lt;!&ndash; 글자 수 표시 &ndash;&gt;
     <TextView
         android:id="@+id/text_count"
         android:layout_width="wrap_content"
@@ -66,20 +75,20 @@
         android:layout_below="@+id/review_text"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="26dp"
+        android:layout_marginRight="45dp"
         android:text="0 / 1000"
         android:fontFamily="@font/gothic_light"
         android:textSize="16sp"
         android:textColor="@color/SUB_400"
-        />
+        />-->
 
     <!-- 등록하기 버튼-->
     <Button
         android:id="@+id/submit_button"
         android:text="등록하기"
         android:background="@drawable/background_br400"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="321dp"
+        android:layout_height="55dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
