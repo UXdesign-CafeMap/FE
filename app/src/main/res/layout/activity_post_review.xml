@@ -1,72 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.cafe.PostReviewActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="101dp">
+    <ImageView
+        android:id="@+id/iv_pr_left_chevron"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:src="@drawable/ic_left_chevron"/>
 
-        <!-- 뒤로가기 버튼 넣어야함 -->
-
-        <TextView
-            android:text="카페온더플랜 건대점"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/gothic_bold"
-            android:textSize="24sp"
-            android:textColor="@color/BR_400"
-            android:gravity="center"
-            android:layout_marginTop="50dp"/>
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_pr_cafe_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="카페온더플랜 건대점"
+        android:layout_marginTop="26dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:fontFamily="@font/gothic_bold"
+        android:textSize="20dp"
+        android:textColor="@color/BR_400"/>
+    <View
+        android:id="@+id/v_pr_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="101dp"
+        android:layout_marginTop="19dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pr_cafe_name"
         android:background="@color/BR_300"/>
 
-    <!-- 사진 추가 버튼 -->
-    <ImageView
-        android:id="@+id/add_photo"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/iv_pr_add_photo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/add_photo_btn"
+        android:layout_marginTop="24dp"
         android:layout_marginLeft="26dp"
-        android:layout_marginTop="126dp"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_pr_line"
+        android:background="@drawable/background_pr_add_photo">
+
+        <!-- 사진 추가 버튼 -->
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_add_photo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- 리뷰 텍스트 입력 영역 -->
     <EditText
-        android:id="@+id/review_text"
+        android:id="@+id/et_pr_review_text"
         android:layout_width="match_parent"
         android:layout_height="182dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="250dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginRight="26dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="26dp"
+        android:paddingHorizontal="22dp"
+        android:paddingVertical="25dp"
         android:hint="이곳에 다녀온 경험을 자세히 공유해 주세요."
         android:fontFamily="@font/gothic_light"
-        android:textSize="16sp"
+        android:textSize="16dp"
         android:textColorHint="@color/SUB_400"
         android:background="@drawable/background_br100"
         android:inputType="textMultiLine"
-        android:gravity="top|start"
+        app:layout_constraintTop_toBottomOf="@id/iv_pr_add_photo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="top"
         android:maxLength="1000"
         android:padding="22dp"/>
 
     <!-- 글자 수 표시 -->
     <TextView
-        android:id="@+id/text_count"
+        android:id="@+id/tv_pr_text_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/review_text"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="26dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_pr_review_text"
         android:text="0 / 1000"
         android:fontFamily="@font/gothic_light"
         android:textSize="16sp"
@@ -75,16 +99,17 @@
 
     <!-- 등록하기 버튼-->
     <Button
-        android:id="@+id/submit_button"
+        android:id="@+id/btn_pr_submit"
         android:text="등록하기"
         android:background="@drawable/background_br400"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
+        android:layout_marginHorizontal="88dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:fontFamily="@font/gothic_regular"
         android:textSize="20sp"
         android:textColor="@android:color/white"/>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
