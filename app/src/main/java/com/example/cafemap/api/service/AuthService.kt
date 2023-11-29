@@ -27,8 +27,7 @@ object AuthService {
     }
 
     fun signIn (email: String, password: String, callback: (Boolean) -> Unit){
-        val signInRequest = SignInRequest(email, password)
-        userRepository.signIn(signInRequest).enqueue(object : Callback<Void> {
+        userRepository.signIn(email, password).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 // 성공 처리...
                 callback(true)
