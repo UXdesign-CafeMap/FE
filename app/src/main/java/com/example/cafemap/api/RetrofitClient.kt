@@ -1,6 +1,8 @@
 package com.example.cafemap.api
 
 import com.example.cafemap.api.repository.AuthRepository
+import com.example.cafemap.api.repository.CafeRepository
+import com.example.cafemap.api.repository.ReviewRepository
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,5 +30,13 @@ object RetrofitClient {
 
     val authRepository: AuthRepository by lazy {
         retrofit.create(AuthRepository::class.java)
+    }
+
+    val reviewRepository: ReviewRepository by lazy {
+        retrofit.create(ReviewRepository::class.java)
+    }
+
+    val cafeRepository: CafeRepository by lazy {
+        retrofit.create(CafeRepository::class.java)
     }
 }

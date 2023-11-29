@@ -64,15 +64,16 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun performSignUp(email: String, password: String) {
-        userService.signUp(email, password) { isSuccess ->
-            if (isSuccess) {
+        userService.signUp(email, password,
+            onSuccess = {
                 Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
                 // 회원가입 성공 시 로그인 화면으로 이동
                 val SignInIntent = Intent(this@SignUpActivity, SignInActivity::class.java)
                 startActivity(SignInIntent)
-            } else {
+            },
+            onFailure = {
                 Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
             }
-        }
+        )
     }
 }

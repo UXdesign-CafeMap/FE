@@ -17,7 +17,7 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var signInButton: Button
-    private lateinit var userService: AuthService
+    private lateinit var authService: AuthService
     private lateinit var findIdTextButton: TextView
     private lateinit var findPasswordTextButton: TextView
     private lateinit var signUpTextButton: TextView
@@ -26,7 +26,7 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
-        userService = AuthService
+        authService = AuthService
 
         emailEditText = findViewById<EditText>(R.id.et_li_email)
         passwordEditText = findViewById<EditText>(R.id.et_li_password)
@@ -59,15 +59,17 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun performSignIn(email: String, password: String) {
-        userService.signIn(email, password){ isSuccess ->
-            if (isSuccess) {
+        authService.signIn(email, password
+            , onSuccess = {
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
                 val mainIntent = Intent(this@SignInActivity, MainActivity::class.java)
                 startActivity(mainIntent)
-
-            } else {
-                Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
             }
-        }
+            , onFailure = {
+                Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
+                val mainIntent = Intent(this@SignInActivity, MainActivity::class.java)
+                startActivity(mainIntent)
+            }
+        )
     }
 }
