@@ -1,11 +1,16 @@
 package com.example.cafemap.ui.cafe
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
+import com.example.cafemap.R
 import com.example.cafemap.api.Cafe
 import com.example.cafemap.api.CafeListResponse
 import com.example.cafemap.databinding.ItemSearchCafeListBinding
@@ -27,23 +32,37 @@ class SearchCafeAdapter(var items : List<Cafe>) : RecyclerView.Adapter<SearchCaf
 //            binding.root.setOnClickListener {
 //                onItemClickListener!!.onItemClicked(item.cafeId)
 
+            val totalSeat = item.totalSeat
+            val remainSeat = item.remainSeat
             binding.tvScCafeName.text = item.name
-            Log.d("seohyun", binding.tvScCafeName.text.toString())
+            binding.tvScCafeDistance.text = item.distance
+            binding.tvScCafeSeat.text = remainSeat.toString() + '/' + totalSeat.toString()
+            binding.tvScReview.text = item.review
+
+            val dens = (remainSeat.toDouble() /totalSeat.toDouble()) * 100
+            val densText = binding.tvScCafeDenseLabel
+            val densColor = binding.cvScCafeDense
+            if (dens <= 30) {
+                densText.text = "여유"
+                densColor.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.DENS_100))
+            } else if (dens <= 60) {
+                densText.text = "보통"
+                densColor.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.DENS_200))
+            } else if (dens <= 90) {
+                densText.text = "혼잡"
+                densColor.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.DENS_300))
+            } else {
+                densText.text = "만석"
+                densColor.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.DENS_400))
+            }
+
+//            binding.cvScCafeContainer.setOnClickListener {
+//            Log.d("seohyunDetail", this)
+//            val i = Intent(requireContext(), CafeDetailActivity::class.java)
+//            startActivity(i)
+//        }
         }
-
-
-//            binding.tvMcTitle.text = item.contents.title
-//            binding.tvItemMyChallengePercent.text = (item.progressRate * 100).toInt().toString() + "%"
-//            binding.cvMcProgress.layoutParams.width = (360 * item.progressRate).toInt()
-
-//            val layoutParams = binding.cvMcProgress.layoutParams
-//            layoutParams.width = (binding.cvMcBackProgress.layoutParams.width * item.progressRate).toInt()
-//            binding.cvMcProgress.layoutParams = layoutParams
-
-//            // 레이아웃을 다시 요청
-//            binding.cvMcProgress.requestLayout()
-
-        }
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

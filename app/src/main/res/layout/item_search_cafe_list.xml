@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="353dp"
+    android:id="@+id/cv_sc_cafe_container"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="8dp"
@@ -43,11 +44,14 @@
             android:textColor="@color/BK"/>
 
         <TextView
+            android:id="@+id/tv_sc_cafe_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="3dp"
             android:text="180m"
+            android:layout_marginLeft="10dp"
             android:fontFamily="@font/gothic_light"
             android:textSize="12dp"
             android:textColor="@color/SUB_400"/>
@@ -57,18 +61,17 @@
             android:layout_width="11dp"
             android:layout_height="11dp"
             android:layout_marginLeft="19dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintLeft_toRightOf="@id/cv_sc_cafe_img"
             app:layout_constraintTop_toBottomOf="@id/tv_sc_cafe_name"
-            app:cardCornerRadius="20dp"
-            android:backgroundTint="@color/DENS_400"/>
+            app:cardCornerRadius="20dp" />
 
         <TextView
             android:id="@+id/tv_sc_cafe_dense_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="14dp"
             app:layout_constraintLeft_toRightOf="@id/cv_sc_cafe_dense"
             app:layout_constraintTop_toBottomOf="@id/tv_sc_cafe_name"
             android:text="보통"
@@ -81,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="14dp"
             app:layout_constraintLeft_toRightOf="@id/tv_sc_cafe_dense_label"
             app:layout_constraintTop_toBottomOf="@id/tv_sc_cafe_name"
             android:text="| 좌석 현황 : "
@@ -90,10 +93,11 @@
             android:textColor="@color/SUB_600"/>
 
         <TextView
+            android:id="@+id/tv_sc_cafe_seat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="14dp"
             app:layout_constraintLeft_toRightOf="@id/tv_sc_cafe_seat_label"
             app:layout_constraintTop_toBottomOf="@id/tv_sc_cafe_name"
             android:text="2 / 5"
@@ -102,6 +106,7 @@
             android:textColor="@color/SUB_600"/>
 
         <TextView
+            android:id="@+id/tv_sc_review"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
