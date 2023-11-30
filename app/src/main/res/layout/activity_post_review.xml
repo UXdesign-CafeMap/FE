@@ -9,11 +9,10 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        >
+        android:gravity="center_horizontal">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="101dp">
+            android:layout_height="80dp">
             <ImageButton
                 android:id="@+id/back_button"
                 android:layout_width="30dp"
@@ -23,13 +22,13 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="47dp"/>
+                android:layout_gravity="center_vertical"/>
 
             <TextView
                 android:text="카페온더플랜 건대점"
                 android:layout_width="323dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_gravity="center_vertical"
                 android:fontFamily="@font/gothic_bold"
                 android:gravity="center"
                 android:textColor="@color/BR_400"
@@ -54,7 +53,8 @@
 
             <HorizontalScrollView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp">
                 <LinearLayout
                     android:id="@+id/selectedImagesContainer"
                     android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
                 </LinearLayout>
             </HorizontalScrollView>
         </LinearLayout>
-        <!-- 리뷰 텍스트 입력 영역 -->
+        <!-- 리뷰 텍스트 입력 영역 -->ㄴㅇ
         <EditText
             android:id="@+id/review_text"
             android:layout_width="321dp"
@@ -84,10 +84,9 @@
         <!-- 등록하기 버튼-->
         <Button
             android:id="@+id/submit_button"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="220dp"
             android:layout_width="321dp"
             android:layout_height="55dp"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/background_br400"
             android:fontFamily="@font/gothic_regular"
