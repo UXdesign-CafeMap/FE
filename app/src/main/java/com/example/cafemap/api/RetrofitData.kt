@@ -76,6 +76,12 @@ data class SearchRequest (
     @SerializedName("search") val search: String
 )
 
+data class BaseResponse<T> (
+    val code: Int,
+    val status: String,
+    val message: String,
+    val result: T
+)
 data class CafeDetailResponse (
     @SerializedName("cafeId") val cafeId: Int,
     @SerializedName("name") val name: String,
