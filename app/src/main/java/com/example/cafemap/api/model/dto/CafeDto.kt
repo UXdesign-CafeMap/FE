@@ -1,13 +1,13 @@
-package com.example.cafemap.api
+package com.example.cafemap.api.model.dto
 
 import com.google.gson.annotations.SerializedName
-import java.util.Date
 
-//data class Border(
-//    @SerializedName("id") val id: Int,
-//    @SerializedName("memberBorders") val memberBorders: List<MemberBorder>
-//)
-
+data class BaseResponse<T> (
+    val code: Int,
+    val status: String,
+    val message: String,
+    val result: T
+)
 data class Cafe (
     @SerializedName("cafeId") val cafeId: Int,
     @SerializedName("name") val name: String,
@@ -41,11 +41,15 @@ data class MyNearCafe (
     @SerializedName("cafeImage") val cafeImage: String,
 )
 
-data class Review (
-    @SerializedName("memberId") val memberId: Int,
-    @SerializedName("uploadDate") val uploadDate: Date,
-    @SerializedName("content") val content: String,
-    @SerializedName("reviewImg") val reviewImg: String,
+data class Review(
+    @SerializedName("memberId")
+    val memberId: Int,
+    @SerializedName("cafeId")
+    val cafeId: Int,
+    @SerializedName("content")
+    val content: String,
+    @SerializedName("imgUrlList")
+    val imgUrlList: List<String>
 )
 
 data class CafeIdRequest (
@@ -64,23 +68,6 @@ data class MemberIdRequest (
 data class MemberRequest (
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String,
-)
-
-data class ReviewRequest (
-    @SerializedName("memberId") val memberId: Int,
-    @SerializedName("cafeId") val cafeId: Int,
-    @SerializedName("content") val content: String,
-)
-
-data class SearchRequest (
-    @SerializedName("search") val search: String
-)
-
-data class BaseResponse<T> (
-    val code: Int,
-    val status: String,
-    val message: String,
-    val result: T
 )
 data class CafeDetailResponse (
     @SerializedName("cafeId") val cafeId: Int,
@@ -128,4 +115,13 @@ data class MyNearCafeListResponse (
 
 data class ReviewResponse (
     @SerializedName("reviewList") val reviewList: List<Review>
+)
+data class ReviewRequest (
+    @SerializedName("memberId") val memberId: Int,
+    @SerializedName("cafeId") val cafeId: Int,
+    @SerializedName("content") val content: String,
+)
+
+data class SearchRequest (
+    @SerializedName("search") val search: String
 )

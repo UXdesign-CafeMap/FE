@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "195349690462",
+    "project_id": "cafescannerapp",
+    "storage_bucket": "cafescannerapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195349690462:android:7b7d331fd3f70d57691ccf",
+        "android_client_info": {
+          "package_name": "com.example.cafemap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7LFoPlgkgi1GAwxFsEGdisqSpXEVX-2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

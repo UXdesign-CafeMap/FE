@@ -1,16 +1,17 @@
 package com.example.cafemap.api.repository
 
+import com.example.cafemap.api.ApiResponse
+import com.example.cafemap.api.model.dto.SignInRequest
+import com.example.cafemap.api.model.dto.SignInResponse
+import com.example.cafemap.api.model.dto.SignUpRequest
+import com.example.cafemap.api.model.dto.SignUpResponse
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
+import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface AuthRepository {
-    @FormUrlEncoded
     @POST("member/signup")
-    fun signUp(@Field("email") email: String, @Field("password") password: String): Call<Void>
-
-    @FormUrlEncoded
+    fun signUp(@Body request: SignUpRequest): Call<ApiResponse<SignUpResponse>>
     @POST("member/signin")
-    fun signIn(@Field("email") email: String, @Field("password") password: String): Call<Void>
+    fun signIn(@Body request: SignInRequest): Call<ApiResponse<SignInResponse>>
 }
