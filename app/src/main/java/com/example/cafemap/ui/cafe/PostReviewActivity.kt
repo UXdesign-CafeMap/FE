@@ -36,11 +36,9 @@ class PostReviewActivity : AppCompatActivity() {
     }
 
     fun initlayout() {
+        binding.ivPrLeftChevron.setOnClickListener {
+            finish()
+        }
 
-        // 회원가입 버튼 클릭 시 홈화면으로 이동 + alert("회원가입이 완료됐습니다")
-//        binding.btLiLoginButton.setOnClickListener {
-//            val i = Intent(applicationContext, MainActivity::class.java)
-//            startActivity(i)
-//        }
     }
 }

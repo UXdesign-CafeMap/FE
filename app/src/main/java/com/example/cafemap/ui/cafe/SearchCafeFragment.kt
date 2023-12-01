@@ -31,6 +31,12 @@ class SearchCafeFragment : Fragment() {
         _binding = FragmentSearchCafeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+        init()
+        return root
+    }
+
+    fun init() {
         userService = ListService
         userService.getCafes()
 
@@ -40,7 +46,6 @@ class SearchCafeFragment : Fragment() {
         adapter.itemClickListener = object: SearchCafeAdapter.OnItemClickListener {
             override fun onItemClicked(cafeId: Int) {
                 val i = Intent(requireContext(), CafeDetailActivity::class.java)
-                Log.d("seohyunDetail", cafeId.toString())
                 i.putExtra("cafeId", cafeId)
                 startActivity(i)
             }
@@ -53,11 +58,5 @@ class SearchCafeFragment : Fragment() {
         searchCafeViewModel.itemList.observe(viewLifecycleOwner, Observer {
             (binding.rvSc.adapter as SearchCafeAdapter).setData(it)
         })
-
-        return root
     }
-
-//    private fun showCafeList() {
-//        userService.
-//    }
 }
