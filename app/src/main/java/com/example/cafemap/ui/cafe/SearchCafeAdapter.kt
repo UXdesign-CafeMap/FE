@@ -12,8 +12,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import com.example.cafemap.R
-import com.example.cafemap.api.Cafe
-import com.example.cafemap.api.CafeListResponse
+import com.example.cafemap.api.model.domain.Cafe
 import com.example.cafemap.databinding.ItemSearchCafeListBinding
 
 class SearchCafeAdapter() : RecyclerView.Adapter<SearchCafeAdapter.ViewHolder>() {

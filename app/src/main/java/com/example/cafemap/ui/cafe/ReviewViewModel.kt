@@ -3,7 +3,7 @@ package com.example.cafemap.ui.cafe
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.cafemap.api.Review
+import com.example.cafemap.api.model.domain.Review
 
 class ReviewViewModel: ViewModel() {
     private var list = ArrayList<Review>()

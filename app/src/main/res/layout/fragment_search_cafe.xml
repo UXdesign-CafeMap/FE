@@ -35,10 +35,11 @@
 
             <ImageView
                 android:id="@+id/iv_sc_filter"
-                android:layout_width="21dp"
-                android:layout_height="21dp"
+                android:src="@drawable/ic_filter"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_marginLeft="21dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="22dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sv_sc_search_bar"/>
 

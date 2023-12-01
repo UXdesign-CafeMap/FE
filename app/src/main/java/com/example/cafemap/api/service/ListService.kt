@@ -1,12 +1,10 @@
 package com.example.cafemap.api.service
 
 import android.util.Log
-import com.example.cafemap.api.BaseResponse
-import com.example.cafemap.api.CafeDetailResponse
-import com.example.cafemap.api.CafeIdRequest
-import com.example.cafemap.api.CafeListResponse
 import com.example.cafemap.api.RetrofitClient
-import com.example.cafemap.api.getCafeId
+import com.example.cafemap.api.model.dto.BaseResponse
+import com.example.cafemap.api.model.dto.CafeDetailResponse
+import com.example.cafemap.api.model.dto.CafeListResponse
 import com.example.cafemap.ui.cafe.CafeDetailViewModel
 import com.example.cafemap.ui.cafe.SearchCafeViewModel
 import retrofit2.Call
@@ -54,8 +52,8 @@ object ListService {
         return searchCafes
     }
     fun getCafeDetail(cafeId: Int){
-        val request = CafeIdRequest(cafeId)
-        userRepository.getCafeDetail(request).enqueue(object: Callback<BaseResponse<CafeDetailResponse>>{
+//        val request = CafeIdRequest(cafeId)
+        userRepository.getCafeDetail(cafeId).enqueue(object: Callback<BaseResponse<CafeDetailResponse>>{
             override fun onResponse(
                 call: Call<BaseResponse<CafeDetailResponse>>,
                 response: Response<BaseResponse<CafeDetailResponse>>
@@ -69,7 +67,7 @@ object ListService {
                     }
                     Log.d("seohyunBody", response.body()?.result.toString())
                 } else {
-                    Log.d("seohyunDetail", response.body()?.result.toString())
+                    Log.d("seohyunDetail", response.body()?.result?.name.toString())
                 }
             }
             override fun onFailure(call: Call<BaseResponse<CafeDetailResponse>>, t: Throwable) {

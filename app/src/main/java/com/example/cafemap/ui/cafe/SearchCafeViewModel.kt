@@ -3,7 +3,7 @@ package com.example.cafemap.ui.cafe
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.cafemap.api.Cafe
+import com.example.cafemap.api.model.domain.Cafe
 
 class SearchCafeViewModel : ViewModel() {
     private var list = ArrayList<Cafe>()

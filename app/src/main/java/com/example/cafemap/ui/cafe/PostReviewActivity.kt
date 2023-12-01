@@ -35,7 +35,7 @@ class PostReviewActivity : AppCompatActivity() {
 
         reviewService = ReviewService
 
-
+        initlayout()
     }
 
     fun initlayout() {

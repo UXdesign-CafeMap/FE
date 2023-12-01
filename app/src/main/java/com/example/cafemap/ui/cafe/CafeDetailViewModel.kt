@@ -3,8 +3,8 @@ package com.example.cafemap.ui.cafe
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.cafemap.api.CafeDetailResponse
-import com.example.cafemap.api.Menu
+import com.example.cafemap.api.model.domain.Menu
+import com.example.cafemap.api.model.dto.CafeDetailResponse
 import com.google.gson.annotations.SerializedName
 
 class CafeDetailViewModel : ViewModel() {
@@ -13,7 +13,8 @@ class CafeDetailViewModel : ViewModel() {
     -1, "", "", -1, -1,
         -1, -1, "", "",
         "","","",0.0,0.0,
-        listOf(Menu("","")
+        listOf(
+            Menu("","")
     )
     )
     private val _cafeDetail = MutableLiveData<CafeDetailResponse>()

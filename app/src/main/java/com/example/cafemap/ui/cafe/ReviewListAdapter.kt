@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cafemap.api.Review
+import com.example.cafemap.api.model.domain.Review
 import com.example.cafemap.databinding.ItemCafeReviewBinding
 
 class ReviewListAdapter() : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>() {

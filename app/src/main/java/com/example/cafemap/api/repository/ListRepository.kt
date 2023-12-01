@@ -1,12 +1,12 @@
 package com.example.cafemap.api.repository
 
-import com.example.cafemap.api.BaseResponse
-import com.example.cafemap.api.CafeDetailResponse
-import com.example.cafemap.api.CafeIdRequest
-import com.example.cafemap.api.CafeListResponse
-import com.example.cafemap.api.LocationRequest
-import com.example.cafemap.api.MarkerCafeResponse
-import com.example.cafemap.api.SearchRequest
+import com.example.cafemap.api.model.dto.BaseResponse
+import com.example.cafemap.api.model.dto.CafeDetailResponse
+import com.example.cafemap.api.model.dto.CafeIdRequest
+import com.example.cafemap.api.model.dto.CafeListResponse
+import com.example.cafemap.api.model.dto.LocationRequest
+import com.example.cafemap.api.model.dto.MarkerCafeResponse
+import com.example.cafemap.api.model.dto.SearchRequest
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -23,7 +23,7 @@ interface ListRepository {
     @GET("/cafe/detail")
     fun getCafeDetail(
         @Query("cafeIdRequest")
-        cafeIdRequest: CafeIdRequest
+        cafeId: Int
     ): Call<BaseResponse<CafeDetailResponse>>
 
     // 해당 마커 카페 조회

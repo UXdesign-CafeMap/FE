@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.example.cafemap.api.CafeDetailResponse
 import com.example.cafemap.api.getCafeId
 import com.example.cafemap.api.service.ListService
 import com.example.cafemap.databinding.ActivityCafeDetailBinding
@@ -28,8 +27,6 @@ class CafeDetailActivity : AppCompatActivity() {
         cafeId = intent.getIntExtra("cafeId", -1)
 
         init()
-
-
 
 //        RetrofitUtil.getRetrofitUtil().getProofPosts(challengeId).enqueue(object : Callback<GetProofPostsResponse> {
 //            override fun onResponse(
@@ -58,8 +55,8 @@ class CafeDetailActivity : AppCompatActivity() {
         cafeViewModel.cafeDetail.observe(this, Observer { cafeDetailResponse ->
             // CafeDetailResponse가 변경될 때마다 호출되는 코드
             binding.tvCdCafeName.text = cafeDetailResponse.name
-            Log.d("seohyunName", cafeDetailResponse.name)
-            binding.tvCdLocation.text = cafeDetailResponse.address
+//            Log.d("seohyunName", cafeDetailResponse.name)
+//            binding.tvCdLocation.text = cafeDetailResponse.address
         })
 
         binding.ivRlLeftChevron.bringToFront()
