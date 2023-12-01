@@ -61,7 +61,7 @@ class CafeDetailActivity : AppCompatActivity() {
             val totalMultiTap = cafeDetailResponse.totalMultitap
             val remainMultiTap = cafeDetailResponse.remainMultitap
 
-            Log.d("seohyunHours", cafeDetailResponse.onpeningHours)
+//            Log.d("seohyunHours", cafeDetailResponse.onpeningHours)
 
             binding.apply{
                 tvCdLocation.text = cafeDetailResponse.address
@@ -92,6 +92,5 @@ class CafeDetailActivity : AppCompatActivity() {
             i.putExtra("cafeId", cafeId)
             startActivity(i)
         }
-
     }
 }

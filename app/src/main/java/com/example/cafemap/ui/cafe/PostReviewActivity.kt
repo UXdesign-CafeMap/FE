@@ -118,23 +118,23 @@ class PostReviewActivity : AppCompatActivity() {
     private fun Int.dpToPx(): Int = (this * resources.displayMetrics.density).toInt()
 
     private fun onClickSubmit() {
-        reviewService.createReview(
-            postId = "1",
-            review = Review(
-                memberId = 1,
-                cafeId = 1,
-                imgUrlList = uploadedImageUrls,
-                content = "테스트 제출",
-            ),
-            onSuccess = { response ->
-                Toast.makeText(this, "리뷰가 등록되었습니다.", Toast.LENGTH_SHORT).show()
-                println(response)
-
-            },
-            onFailure = { throwable ->
-                Toast.makeText(this, "리뷰 등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
-                println(throwable)
-            }
-        )
+//        reviewService.createReview(
+//            postId = "1",
+//            review = Review(
+//                memberId = 1,
+//                cafeId = 1,
+//                imgUrlList = uploadedImageUrls,
+//                content = "테스트 제출"
+//            ),
+//            onSuccess = { response ->
+//                Toast.makeText(this, "리뷰가 등록되었습니다.", Toast.LENGTH_SHORT).show()
+//                println(response)
+//
+//            },
+//            onFailure = { throwable ->
+//                Toast.makeText(this, "리뷰 등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
+//                println(throwable)
+//            }
+//        )
     }
 }

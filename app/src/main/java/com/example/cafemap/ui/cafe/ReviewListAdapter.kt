@@ -1,6 +1,7 @@
 package com.example.cafemap.ui.cafe
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,10 @@ class ReviewListAdapter() : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>()
 
     inner class ViewHolder(val binding: ItemCafeReviewBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item : Review) {
+            Log.d("seohyunBinding", item.cafeId.toString())
+            binding.tvCrProfileName.text = item.memberId.toString()
+            binding.tvCrProfileDetail.text = "리뷰 " + item.memberId + " | " + item.uploadData
+            binding.tvCrReviewContent.text = item.content
             binding.tvCrSeeMore.setOnClickListener {
                 binding.tvCrSeeMore.visibility = View.GONE
                 binding.tvCrReviewContent.ellipsize = null

@@ -77,11 +77,8 @@ class SearchCafeFragment : Fragment() {
                     }
                 }
             }
-
             override fun onNothingSelected(parent: AdapterView<*>) {
-                TODO("Not yet implemented")
             }
-
         }
         binding.spSc.setSelection(0)
 
