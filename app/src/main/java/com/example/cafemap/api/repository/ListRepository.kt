@@ -22,7 +22,7 @@ interface ListRepository {
     // 카페 개별 조회
     @GET("/cafe/detail")
     fun getCafeDetail(
-        @Query("cafeIdRequest")
+        @Query("cafeId")
         cafeId: Int
     ): Call<BaseResponse<CafeDetailResponse>>
 

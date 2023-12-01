@@ -6,6 +6,7 @@ import com.example.cafemap.api.model.dto.BaseResponse
 import com.example.cafemap.api.model.dto.CafeDetailResponse
 import com.example.cafemap.api.model.dto.CafeListResponse
 import com.example.cafemap.ui.cafe.CafeDetailViewModel
+import com.example.cafemap.ui.cafe.HomeListViewModel
 import com.example.cafemap.ui.cafe.SearchCafeViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,6 +17,7 @@ object ListService {
 
     private val searchCafes = SearchCafeViewModel()
     private val detailCafes = CafeDetailViewModel()
+    private val detailMenus = HomeListViewModel()
 
     fun getCafes(){
         userRepository.getCafes().enqueue(object: Callback<BaseResponse<CafeListResponse>>{
@@ -63,11 +65,11 @@ object ListService {
                     response.body()?.result.let {
                         if(it != null) {
                             detailCafes.setDetail(it)
+                            detailMenus.setDetailMenu(it.menus)
                         }
                     }
-                    Log.d("seohyunBody", response.body()?.result.toString())
                 } else {
-                    Log.d("seohyunDetail", response.body()?.result?.name.toString())
+                    Log.d("seohyun", response.body()?.result?.name.toString())
                 }
             }
             override fun onFailure(call: Call<BaseResponse<CafeDetailResponse>>, t: Throwable) {
@@ -79,6 +81,10 @@ object ListService {
 
     fun getCafeDetailViewModel() : CafeDetailViewModel {
         return detailCafes
+    }
+
+    fun getDetailMenusViewModel() : HomeListViewModel {
+        return detailMenus
     }
     fun getCafeMarker(){}
     fun searchCafe(){}

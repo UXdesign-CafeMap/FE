@@ -40,7 +40,7 @@ data class CafeDetailResponse (
     @SerializedName("remainMultitap") val remainMultitap: Int,
     @SerializedName("distance") val distance: String,
     @SerializedName("address") val address: String,
-    @SerializedName("openingHours") val openingHours: String,
+    @SerializedName("onpeningHours") val onpeningHours: String,
     @SerializedName("isOpen") val isOpen: String,
     @SerializedName("cafeImage") val cafeImage: String,
     @SerializedName("latitude") val latitude: Double,

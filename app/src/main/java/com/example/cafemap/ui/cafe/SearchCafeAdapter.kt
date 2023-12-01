@@ -1,16 +1,9 @@
 package com.example.cafemap.ui.cafe
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.*
 import com.example.cafemap.R
 import com.example.cafemap.api.model.domain.Cafe
 import com.example.cafemap.databinding.ItemSearchCafeListBinding

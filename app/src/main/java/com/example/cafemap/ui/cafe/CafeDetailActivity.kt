@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cafemap.api.getCafeId
 import com.example.cafemap.api.service.ListService
 import com.example.cafemap.databinding.ActivityCafeDetailBinding
@@ -52,11 +54,34 @@ class CafeDetailActivity : AppCompatActivity() {
         cafeViewModel = userService.getCafeDetailViewModel()
 //        Log.d("seohyunId", cafeId.toString())
 
+
         cafeViewModel.cafeDetail.observe(this, Observer { cafeDetailResponse ->
             // CafeDetailResponse가 변경될 때마다 호출되는 코드
-            binding.tvCdCafeName.text = cafeDetailResponse.name
-//            Log.d("seohyunName", cafeDetailResponse.name)
-//            binding.tvCdLocation.text = cafeDetailResponse.address
+            val totalSeat = cafeDetailResponse.totalSeat
+            val remainSeat = cafeDetailResponse.remainSeat
+
+            val totalMultiTap = cafeDetailResponse.totalMultitap
+            val remainMultiTap = cafeDetailResponse.remainMultitap
+
+            Log.d("seohyunHours", cafeDetailResponse.onpeningHours)
+
+            binding.apply{
+                tvCdLocation.text = cafeDetailResponse.address
+                tvCdCafeName.text = cafeDetailResponse.name
+                tvCdOpenHours.text = cafeDetailResponse.onpeningHours
+                tvCdSeats.text = remainSeat.toString() + '/' + totalSeat.toString()
+                tvCdSeatsMultiTab.text = remainMultiTap.toString() + '/' + totalMultiTap.toString()
+
+                rvCdMenus.layoutManager = GridLayoutManager(this@CafeDetailActivity, 2)
+                rvCdMenus.adapter = HomeListAdapter()
+
+                val menusViewModel = userService.getDetailMenusViewModel()
+
+                menusViewModel.itemList.observe(this@CafeDetailActivity, Observer {
+                    (rvCdMenus.adapter as HomeListAdapter).setData(it)
+                })
+            }
+
         })
 
         binding.ivRlLeftChevron.bringToFront()
@@ -66,6 +91,7 @@ class CafeDetailActivity : AppCompatActivity() {
 
         binding.cvCdReviewContainer.setOnClickListener {
             var i = Intent(this, ReviewListActivity::class.java)
+            i.putExtra("cafeId", cafeId)
             startActivity(i)
         }
 
