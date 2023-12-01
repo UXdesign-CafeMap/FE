@@ -94,4 +94,9 @@ class SearchCafeAdapter() : RecyclerView.Adapter<SearchCafeAdapter.ViewHolder>()
         items.addAll(list)
         notifyDataSetChanged()
     }
+
+    fun sortByDistance() {
+        items = ArrayList(items.sortedBy { it.distance })
+        notifyDataSetChanged()
+    }
 }

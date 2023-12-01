@@ -6,11 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.core.content.ContentProviderCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cafemap.R
 import com.example.cafemap.api.getCafeId
 import com.example.cafemap.api.service.AuthService
 import com.example.cafemap.api.service.ListService
@@ -58,5 +61,29 @@ class SearchCafeFragment : Fragment() {
         searchCafeViewModel.itemList.observe(viewLifecycleOwner, Observer {
             (binding.rvSc.adapter as SearchCafeAdapter).setData(it)
         })
+
+        val spinnerItems = resources.getStringArray(R.array.spinner_array)
+        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner, spinnerItems)
+
+        binding.spSc.adapter = spinnerAdapter
+        binding.spSc.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                when(position) {
+                    0 -> { //거리순
+                        (binding.rvSc.adapter as SearchCafeAdapter).sortByDistance()
+                    }
+                    1 -> { //리뷰순
+
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                TODO("Not yet implemented")
+            }
+
+        }
+        binding.spSc.setSelection(0)
+
     }
 }

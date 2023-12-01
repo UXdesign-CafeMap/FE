@@ -44,10 +44,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/sv_sc_search_bar"/>
 
             <Spinner
+                android:id="@+id/sp_sc"
+                android:theme="@style/SpinnerTheme"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="19dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="18dp"
                 app:layout_constraintLeft_toRightOf="@+id/iv_sc_filter"
                 app:layout_constraintTop_toBottomOf="@+id/sv_sc_search_bar"/>
 
