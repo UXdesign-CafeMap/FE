@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cafemap.api.getCafeId
 import com.example.cafemap.api.service.AuthService
 import com.example.cafemap.api.service.ListService
 import com.example.cafemap.databinding.FragmentSearchCafeBinding
@@ -31,20 +32,27 @@ class SearchCafeFragment : Fragment() {
         val root: View = binding.root
 
         userService = ListService
+        userService.getCafes()
 
         binding.rvSc.layoutManager = LinearLayoutManager(requireContext())
 
-//        binding.rvSc.adapter = SearchCafeAdapter(searchCafes.itemList.value!!)
-        binding.rvSc.adapter = SearchCafeAdapter(emptyList())
+        val adapter = SearchCafeAdapter()
+        adapter.itemClickListener = object: SearchCafeAdapter.OnItemClickListener {
+            override fun onItemClicked(cafeId: Int) {
+                val i = Intent(requireContext(), CafeDetailActivity::class.java)
+                Log.d("seohyunDetail", cafeId.toString())
+                i.putExtra("cafeId", cafeId)
+                startActivity(i)
+            }
+        }
+
+        binding.rvSc.adapter = adapter
 
         val searchCafeViewModel = userService.getSearchCafeViewModel()
 
         searchCafeViewModel.itemList.observe(viewLifecycleOwner, Observer {
             (binding.rvSc.adapter as SearchCafeAdapter).setData(it)
         })
-
-        userService.getCafes()
-
 
         return root
     }

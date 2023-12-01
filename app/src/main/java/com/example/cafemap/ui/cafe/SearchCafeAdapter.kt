@@ -1,5 +1,6 @@
 package com.example.cafemap.ui.cafe
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -15,22 +16,21 @@ import com.example.cafemap.api.Cafe
 import com.example.cafemap.api.CafeListResponse
 import com.example.cafemap.databinding.ItemSearchCafeListBinding
 
-class SearchCafeAdapter(var items : List<Cafe>) : RecyclerView.Adapter<SearchCafeAdapter.ViewHolder>() {
+class SearchCafeAdapter() : RecyclerView.Adapter<SearchCafeAdapter.ViewHolder>() {
+
+    var items = arrayListOf<Cafe>()
+
+    var itemClickListener : OnItemClickListener? = null
 
     interface OnItemClickListener {
         fun onItemClicked(cafeId: Int)
     }
 
-    private var onItemClickListener : OnItemClickListener? = null
-
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        onItemClickListener = listener
-    }
-
     inner class ViewHolder(val binding: ItemSearchCafeListBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : Cafe) {
-//            binding.root.setOnClickListener {
-//                onItemClickListener!!.onItemClicked(item.cafeId)
+            binding.root.setOnClickListener {
+                itemClickListener?.onItemClicked(item.cafeId)
+            }
 
             val totalSeat = item.totalSeat
             val remainSeat = item.remainSeat
@@ -39,28 +39,42 @@ class SearchCafeAdapter(var items : List<Cafe>) : RecyclerView.Adapter<SearchCaf
             binding.tvScCafeSeat.text = remainSeat.toString() + '/' + totalSeat.toString()
             binding.tvScReview.text = item.review
 
-            val dens = (remainSeat.toDouble() /totalSeat.toDouble()) * 100
+            val dens = (remainSeat.toDouble() / totalSeat.toDouble()) * 100
             val densText = binding.tvScCafeDenseLabel
             val densColor = binding.cvScCafeDense
             if (dens <= 30) {
                 densText.text = "여유"
-                densColor.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.DENS_100))
+                densColor.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        R.color.DENS_100
+                    )
+                )
             } else if (dens <= 60) {
                 densText.text = "보통"
-                densColor.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.DENS_200))
+                densColor.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        R.color.DENS_200
+                    )
+                )
             } else if (dens <= 90) {
                 densText.text = "혼잡"
-                densColor.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.DENS_300))
+                densColor.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        R.color.DENS_300
+                    )
+                )
             } else {
                 densText.text = "만석"
-                densColor.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.DENS_400))
+                densColor.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        itemView.context,
+                        R.color.DENS_400
+                    )
+                )
             }
-
-//            binding.cvScCafeContainer.setOnClickListener {
-//            Log.d("seohyunDetail", this)
-//            val i = Intent(requireContext(), CafeDetailActivity::class.java)
-//            startActivity(i)
-//        }
         }
     }
 
@@ -81,7 +95,8 @@ class SearchCafeAdapter(var items : List<Cafe>) : RecyclerView.Adapter<SearchCaf
     }
 
     fun setData(list: List<Cafe>) {
-        items = list
+        items.clear()
+        items.addAll(list)
         notifyDataSetChanged()
     }
 }
