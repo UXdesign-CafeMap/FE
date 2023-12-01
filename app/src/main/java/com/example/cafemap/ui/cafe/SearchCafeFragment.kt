@@ -1,22 +1,30 @@
 package com.example.cafemap.ui.cafe
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.SearchView
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.core.content.ContentProviderCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cafemap.R
+import com.example.cafemap.api.getCafeId
+import com.example.cafemap.api.service.AuthService
+import com.example.cafemap.api.service.ListService
 import com.example.cafemap.databinding.FragmentSearchCafeBinding
 
 class SearchCafeFragment : Fragment() {
 
     private var _binding: FragmentSearchCafeBinding? = null
     private val binding get() = _binding!!
-    private val searchCafes = SearchCafeViewModel()
+
+    private lateinit var userService: ListService
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,28 +34,53 @@ class SearchCafeFragment : Fragment() {
         _binding = FragmentSearchCafeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.rvSc.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvSc.adapter = SearchCafeAdapter(searchCafes.itemList.value!!)
 
-        searchCafes.itemList.observe(viewLifecycleOwner, Observer {
+        init()
+        return root
+    }
+
+    fun init() {
+        userService = ListService
+        userService.getCafes()
+
+        binding.rvSc.layoutManager = LinearLayoutManager(requireContext())
+
+        val adapter = SearchCafeAdapter()
+        adapter.itemClickListener = object: SearchCafeAdapter.OnItemClickListener {
+            override fun onItemClicked(cafeId: Int) {
+                val i = Intent(requireContext(), CafeDetailActivity::class.java)
+                i.putExtra("cafeId", cafeId)
+                startActivity(i)
+            }
+        }
+
+        binding.rvSc.adapter = adapter
+
+        val searchCafeViewModel = userService.getSearchCafeViewModel()
+
+        searchCafeViewModel.itemList.observe(viewLifecycleOwner, Observer {
             (binding.rvSc.adapter as SearchCafeAdapter).setData(it)
         })
 
-//        RetrofitUtil.getRetrofitUtil()
-//            .getChallenge(GetMemberAllChallengesRequest(getUserName(requireContext()), 0, 10))
-//            .enqueue(object : Callback<GetMemberAllChallengesResponse> {
-//                override fun onResponse(
-//                    call: Call<GetMemberAllChallengesResponse>,
-//                    response: Response<GetMemberAllChallengesResponse>
-//                ) {
-//                    // 서버 응답 처리
-//                }
-//
-//                override fun onFailure(call: Call<GetMemberAllChallengesResponse>, t: Throwable) {
-//                    // 통신 실패 처리
-//                }
-//            })
+        val spinnerItems = resources.getStringArray(R.array.spinner_array)
+        val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner, spinnerItems)
 
-        return root
+        binding.spSc.adapter = spinnerAdapter
+        binding.spSc.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                when(position) {
+                    0 -> { //거리순
+                        (binding.rvSc.adapter as SearchCafeAdapter).sortByDistance()
+                    }
+                    1 -> { //리뷰순
+
+                    }
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
+        }
+        binding.spSc.setSelection(0)
+
     }
 }

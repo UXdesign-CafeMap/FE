@@ -1,5 +1,6 @@
 package com.example.cafemap.api.model.dto
 
+import com.example.cafemap.api.model.domain.Review
 import com.google.gson.annotations.SerializedName
 
 data class CreateReviewRequest(
@@ -20,8 +21,7 @@ data class CreateReviewResponse(
 
 
 data class GetReviewResponse(
-    @SerializedName("count")
-    val count: Int
+    @SerializedName("reviewList") val reviewList: List<Review>
 )
 
 data class GetReviewCountResponse(
