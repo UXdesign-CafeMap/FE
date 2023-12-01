@@ -3,10 +3,9 @@ package com.example.cafemap.ui.cafe
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.cafemap.api.model.domain.Cafe
 import com.example.cafemap.api.model.domain.Menu
 
-class HomeListViewModel : ViewModel() {
+class MenuListViewModel : ViewModel() {
     private var list = ArrayList<Menu>()
     private var _itemList = MutableLiveData<List<Menu>>()
 

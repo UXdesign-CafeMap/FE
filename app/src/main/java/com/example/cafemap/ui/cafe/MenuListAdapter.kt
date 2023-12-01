@@ -1,14 +1,11 @@
 package com.example.cafemap.ui.cafe
 
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cafemap.api.model.domain.Cafe
 import com.example.cafemap.databinding.ItemDetailMenuBinding
-import com.example.cafemap.databinding.ItemSearchCafeListBinding
 
-class HomeListAdapter() : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
+class MenuListAdapter() : RecyclerView.Adapter<MenuListAdapter.ViewHolder>() {
 
     var items = arrayListOf<com.example.cafemap.api.model.domain.Menu>()
 
@@ -24,12 +21,12 @@ class HomeListAdapter() : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
             binding.tvIdmMenuPrice.text = item.menuPrice
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuListAdapter.ViewHolder {
         val binding = ItemDetailMenuBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: HomeListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MenuListAdapter.ViewHolder, position: Int) {
         holder.bind(items[position])
     }
 

@@ -5,8 +5,10 @@ import com.example.cafemap.api.RetrofitClient
 import com.example.cafemap.api.model.dto.BaseResponse
 import com.example.cafemap.api.model.dto.CafeDetailResponse
 import com.example.cafemap.api.model.dto.CafeListResponse
+import com.example.cafemap.api.model.dto.LocationRequest
+import com.example.cafemap.api.model.dto.MarkerCafeResponse
 import com.example.cafemap.ui.cafe.CafeDetailViewModel
-import com.example.cafemap.ui.cafe.HomeListViewModel
+import com.example.cafemap.ui.cafe.MenuListViewModel
 import com.example.cafemap.ui.cafe.SearchCafeViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,7 +19,7 @@ object ListService {
 
     private val searchCafes = SearchCafeViewModel()
     private val detailCafes = CafeDetailViewModel()
-    private val detailMenus = HomeListViewModel()
+    private val detailMenus = MenuListViewModel()
 
     fun getCafes(){
         userRepository.getCafes().enqueue(object: Callback<BaseResponse<CafeListResponse>>{
@@ -27,18 +29,11 @@ object ListService {
             ) {
                 // 서버 응답 처리
                 if (response.isSuccessful) {
-//                    val list = ArrayList<Cafe>()
                     response.body()?.result?.cafeList.let {
-//                        for (i in it){
-//                            // 각각의 Cafe 객체에 접근
-//                            list.add(i)
-//                            Log.d("seohyun", i.toString())
-//                        }
                         if (it != null) {
                             searchCafes.setSearchCafe(it)
                         }
                     }
-//                    list.addAll((response.body()?.cafeList!!))
                 } else {
                     Log.d("seohyun", response.errorBody().toString())
                 }
@@ -83,10 +78,34 @@ object ListService {
         return detailCafes
     }
 
-    fun getDetailMenusViewModel() : HomeListViewModel {
+    fun getDetailMenusViewModel() : MenuListViewModel {
         return detailMenus
     }
-    fun getCafeMarker(){}
+    fun getCafeMarker(location: LocationRequest){
+        userRepository.getCafeMarker(location).enqueue(object: Callback<BaseResponse<MarkerCafeResponse>>{
+            override fun onResponse(
+                call: Call<BaseResponse<MarkerCafeResponse>>,
+                response: Response<BaseResponse<MarkerCafeResponse>>
+            ) {
+                // 서버 응답 처리
+                if (response.isSuccessful) {
+                    response.body()?.result?.let {
+                        if (it != null) {
+//                            searchCafes.setSearchCafe(it)
+                        }
+                    }
+                } else {
+                    Log.d("seohyun", response.errorBody().toString())
+                }
+
+            }
+
+            override fun onFailure(call: Call<BaseResponse<MarkerCafeResponse>>, t: Throwable) {
+                Log.d("seohyun", t.message.toString())
+            }
+
+        })
+    }
     fun searchCafe(){}
 
 

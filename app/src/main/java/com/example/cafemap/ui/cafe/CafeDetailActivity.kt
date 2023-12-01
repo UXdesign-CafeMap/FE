@@ -6,8 +6,6 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cafemap.api.getCafeId
 import com.example.cafemap.api.service.ListService
 import com.example.cafemap.databinding.ActivityCafeDetailBinding
 
@@ -73,12 +71,12 @@ class CafeDetailActivity : AppCompatActivity() {
                 tvCdSeatsMultiTab.text = remainMultiTap.toString() + '/' + totalMultiTap.toString()
 
                 rvCdMenus.layoutManager = GridLayoutManager(this@CafeDetailActivity, 2)
-                rvCdMenus.adapter = HomeListAdapter()
+                rvCdMenus.adapter = MenuListAdapter()
 
                 val menusViewModel = userService.getDetailMenusViewModel()
 
                 menusViewModel.itemList.observe(this@CafeDetailActivity, Observer {
-                    (rvCdMenus.adapter as HomeListAdapter).setData(it)
+                    (rvCdMenus.adapter as MenuListAdapter).setData(it)
                 })
             }
 

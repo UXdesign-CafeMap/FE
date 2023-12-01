@@ -1,4 +1,4 @@
-package com.example.cafemap.ui.cafe
+package com.example.cafemap.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,11 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cafemap.R
 import com.example.cafemap.api.model.domain.Cafe
+import com.example.cafemap.databinding.ItemHomeCafeListBinding
 import com.example.cafemap.databinding.ItemSearchCafeListBinding
+import com.example.cafemap.ui.cafe.SearchCafeAdapter
 
-class SearchCafeAdapter() : RecyclerView.Adapter<SearchCafeAdapter.ViewHolder>() {
+class HomeListAdapter() : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
 
     var items = arrayListOf<Cafe>()
 
@@ -18,8 +20,8 @@ class SearchCafeAdapter() : RecyclerView.Adapter<SearchCafeAdapter.ViewHolder>()
         fun onItemClicked(cafeId: Int)
     }
 
-    inner class ViewHolder(val binding: ItemSearchCafeListBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : Cafe) {
+    inner class ViewHolder(val binding: ItemHomeCafeListBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(item: Cafe){
             binding.root.setOnClickListener {
                 itemClickListener?.onItemClicked(item.cafeId)
             }
@@ -28,15 +30,14 @@ class SearchCafeAdapter() : RecyclerView.Adapter<SearchCafeAdapter.ViewHolder>()
             val remainSeat = item.remainSeat
 
             binding.apply {
-                tvScCafeName.text = item.name
-                tvScCafeDistance.text = item.distance
-                tvScCafeSeat.text = remainSeat.toString() + '/' + totalSeat.toString()
-                tvScReview.text = item.review
+                tvHlCafeName.text = item.name
+                tvHlCafeDistance.text = item.distance
+                tvHlCafeSeat.text = remainSeat.toString() + '/' + totalSeat.toString()
             }
 
             val dens = (remainSeat.toDouble() / totalSeat.toDouble()) * 100
-            val densText = binding.tvScCafeDenseLabel
-            val densColor = binding.cvScCafeDense
+            val densText = binding.tvHlCafeDenseLabel
+            val densColor = binding.cvHlCafeDense
             if (dens <= 30) {
                 densText.text = "여유"
                 densColor.setCardBackgroundColor(
@@ -72,21 +73,20 @@ class SearchCafeAdapter() : RecyclerView.Adapter<SearchCafeAdapter.ViewHolder>()
             }
         }
     }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ViewHolder {
-        val binding = ItemSearchCafeListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+    ): HomeListAdapter.ViewHolder {
+        val binding = ItemHomeCafeListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
-    }
-
-    override fun getItemCount(): Int {
-        return items.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
+    }
+
+    override fun getItemCount(): Int {
+        return items.size
     }
 
     fun setData(list: List<Cafe>) {
@@ -94,4 +94,5 @@ class SearchCafeAdapter() : RecyclerView.Adapter<SearchCafeAdapter.ViewHolder>()
         items.addAll(list)
         notifyDataSetChanged()
     }
+
 }
