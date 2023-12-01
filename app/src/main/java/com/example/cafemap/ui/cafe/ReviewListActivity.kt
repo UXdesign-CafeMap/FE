@@ -43,8 +43,9 @@ class ReviewListActivity : AppCompatActivity() {
         }
 
     fun initLayout() {
+
         binding.rvRl.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val adapter = ReviewListAdapter(applicationContext, reviewViewModel.itemList.value!!)
+        val adapter = ReviewListAdapter()
 //        adapter.setOnItemClickListener(object : ReviewListAdapter.OnItemClickListener {
 //            override fun onItemClicked(reviewId: Int) {
 //                val i = Intent(applicationContext, ReviewDetail어쩌고)
@@ -52,7 +53,7 @@ class ReviewListActivity : AppCompatActivity() {
 //        })
         binding.rvRl.adapter = adapter
         reviewViewModel.itemList.observe(this, Observer {
-            (binding.rvRl.adapter as ReviewListAdapter).setData((it))
+            (binding.rvRl.adapter as ReviewListAdapter).setData(it)
         })
         binding.ivRlLeftChevron.setOnClickListener {
             finish()
