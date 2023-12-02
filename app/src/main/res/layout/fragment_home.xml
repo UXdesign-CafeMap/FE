@@ -18,6 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <fragment
+                android:id="@+id/map_home"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="250dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="285dp"
