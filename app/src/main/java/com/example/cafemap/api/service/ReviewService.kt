@@ -20,7 +20,7 @@ object ReviewService {
 
     private val reviews = ReviewViewModel()
 
-    fun createReview(postId: String, review: Review, onSuccess: (CreateReviewResponse) -> Unit, onFailure: (Throwable) -> Unit) {
+    fun createReview( review: Review, onSuccess: (CreateReviewResponse) -> Unit, onFailure: (Throwable) -> Unit) {
         val createReviewRequest = CreateReviewRequest(
             memberId = review.memberId,
             cafeId = review.cafeId,
@@ -28,7 +28,7 @@ object ReviewService {
             imgUrlList = review.imgUrlList
         )
 
-        reviewRepository.createReview(postId, createReviewRequest).enqueue(object : Callback<ApiResponse<CreateReviewResponse>> {
+        reviewRepository.createReview( createReviewRequest).enqueue(object : Callback<ApiResponse<CreateReviewResponse>> {
             override fun onResponse(call: Call<ApiResponse<CreateReviewResponse>>, response: Response<ApiResponse<CreateReviewResponse>>) {
                 if (response.isSuccessful) {
                     response.body()?.result?.let(onSuccess)

@@ -1,136 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.cafe.PostReviewActivity">
-
-    <ImageView
-        android:id="@+id/iv_pr_left_chevron"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:src="@drawable/ic_left_chevron"/>
-
-    <TextView
-        android:id="@+id/tv_pr_cafe_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="카페온더플랜 건대점"
-        android:layout_marginTop="26dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:fontFamily="@font/gothic_bold"
-        android:textSize="20dp"
-        android:textColor="@color/BR_400"/>
-    <View
-        android:id="@+id/v_pr_line"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="19dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pr_cafe_name"
-        android:background="@color/BR_300"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/iv_pr_add_photo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="26dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_pr_line"
-        android:background="@drawable/background_pr_add_photo">
-
-        <!-- 사진 추가 버튼 -->
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_add_photo"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- 리뷰 텍스트 입력 영역 -->
-    <EditText
-        android:id="@+id/et_pr_review_text"
-        android:layout_width="match_parent"
-        android:layout_height="182dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginHorizontal="26dp"
-        android:paddingHorizontal="22dp"
-        android:paddingVertical="25dp"
-        android:hint="이곳에 다녀온 경험을 자세히 공유해 주세요."
-        android:fontFamily="@font/gothic_light"
-        android:textSize="16dp"
-        android:textColorHint="@color/SUB_400"
-        android:background="@drawable/background_br100"
-        android:inputType="textMultiLine"
-        app:layout_constraintTop_toBottomOf="@id/iv_pr_add_photo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:gravity="top"
-        android:maxLength="1000"
-        android:padding="22dp"/>
-
-    <!-- 글자 수 표시 -->
-    <TextView
-        android:id="@+id/tv_pr_text_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="13dp"
-        android:layout_marginRight="30dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_pr_review_text"
-        android:text="0 / 1000"
-        android:fontFamily="@font/gothic_light"
-        android:textSize="16sp"
-        android:textColor="@color/SUB_400"
-        />
-
-    <!-- 등록하기 버튼-->
-    <Button
-        android:id="@+id/btn_pr_submit"
-        android:text="등록하기"
-        android:background="@drawable/background_br400"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:layout_marginHorizontal="88dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:fontFamily="@font/gothic_regular"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/back_btn"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:text="카페온더플랜 건대점"
+                android:layout_width="323dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/gothic_bold"
+                android:gravity="center"
+                android:textColor="@color/BR_400"
+                android:textSize="24sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/BR_300"/>
         <!-- 이미지 추가 영역 -->
-<!--        <LinearLayout-->
-<!--            android:layout_marginTop="30dp"-->
-<!--            android:paddingLeft="45dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <HorizontalScrollView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="5dp">-->
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/selectedImagesContainer"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal">-->
-<!--                    &lt;!&ndash; 동적으로 추가될 이미지 뷰들이 위치할 공간 &ndash;&gt;-->
-<!--                </LinearLayout>-->
-<!--            </HorizontalScrollView>-->
-<!--        </LinearLayout>-->
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:paddingLeft="45dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- 사진 추가 버튼 -->
+            <ImageButton
+                android:id="@+id/add_photo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_add_photo"
+                android:background="@drawable/button_border"
+                />
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp">
+                <LinearLayout
+                    android:id="@+id/selectedImagesContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <!-- 동적으로 추가될 이미지 뷰들이 위치할 공간 -->
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+        <!-- 리뷰 텍스트 입력 영역 -->
+        <EditText
+            android:id="@+id/review_text"
+            android:layout_width="321dp"
+            android:layout_height="182dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:hint="이곳에 다녀온 경험을 공유해 주세요."
+            android:fontFamily="@font/gothic_light"
+            android:textSize="16sp"
+            android:textColorHint="@color/SUB_400"
+            android:background="@drawable/background_br100"
+            android:inputType="textMultiLine"
+            android:gravity="top|start"
+            android:maxLength="1000"
+            android:padding="22dp"
+            android:layout_marginTop="30dp"/>
+        <!-- 등록하기 버튼-->
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_marginTop="220dp"
+            android:layout_width="321dp"
+            android:layout_height="55dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/background_br400"
+            android:fontFamily="@font/gothic_regular"
+            android:text="등록하기"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+</RelativeLayout>

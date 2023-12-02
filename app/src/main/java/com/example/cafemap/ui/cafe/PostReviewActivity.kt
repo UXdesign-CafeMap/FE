@@ -35,14 +35,11 @@ class PostReviewActivity : AppCompatActivity() {
 
         reviewService = ReviewService
 
-        initlayout()
-    }
+        submitButton = findViewById(R.id.submit_button)
 
-    fun initlayout() {
-        binding.ivPrAddPhoto.setOnClickListener { openGallery() }
-        binding.ivPrLeftChevron.setOnClickListener { finish() }
-        binding.btnPrSubmit.setOnClickListener { onClickSubmit() }
-
+        binding.addPhoto.setOnClickListener { openGallery() }
+        binding.backButton.setOnClickListener { finish() }
+        binding.submitButton.setOnClickListener { onClickSubmit() }
     }
 
     private fun openGallery() {
@@ -71,7 +68,7 @@ class PostReviewActivity : AppCompatActivity() {
 
     private fun addImageToLayoutAndUpload(imageUri: Uri) {
         val imageLayout = FrameLayout(this).apply {
-            layoutParams = LinearLayout.LayoutParams(120.dpToPx(), 120.dpToPx()).also {
+            layoutParams = LinearLayout.LayoutParams(100.dpToPx(), 100.dpToPx()).also {
                 it.setMargins(4.dpToPx(), 0, 4.dpToPx(), 0)
             }
         }
@@ -89,7 +86,7 @@ class PostReviewActivity : AppCompatActivity() {
         imageLayout.addView(imageView)
         imageLayout.addView(spinner)
 
-//        binding.selectedImagesContainer.addView(imageLayout)
+        binding.selectedImagesContainer.addView(imageLayout)
 
         uploadImageToFirebase(imageUri, imageLayout, spinner)
     }
@@ -110,7 +107,7 @@ class PostReviewActivity : AppCompatActivity() {
             }
             .addOnFailureListener {
                 runOnUiThread {
-//                    binding.selectedImagesContainer.removeView(imageLayout) // 업로드 실패시 레이아웃 제거
+                    binding.selectedImagesContainer.removeView(imageLayout) // 업로드 실패시 레이아웃 제거
                 }
             }
     }
@@ -118,23 +115,21 @@ class PostReviewActivity : AppCompatActivity() {
     private fun Int.dpToPx(): Int = (this * resources.displayMetrics.density).toInt()
 
     private fun onClickSubmit() {
-//        reviewService.createReview(
-//            postId = "1",
-//            review = Review(
-//                memberId = 1,
-//                cafeId = 1,
-//                imgUrlList = uploadedImageUrls,
-//                content = "테스트 제출"
-//            ),
-//            onSuccess = { response ->
-//                Toast.makeText(this, "리뷰가 등록되었습니다.", Toast.LENGTH_SHORT).show()
-//                println(response)
-//
-//            },
-//            onFailure = { throwable ->
-//                Toast.makeText(this, "리뷰 등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
-//                println(throwable)
-//            }
-//        )
+        reviewService.createReview(
+            review = Review(
+                memberId = 1,
+                cafeId = 1,
+                imgUrlList = uploadedImageUrls,
+                content = binding.reviewText.text.toString(),
+            ),
+            onSuccess = { response ->
+                Toast.makeText(this, "리뷰가 등록되었습니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            },
+            onFailure = { throwable ->
+                Toast.makeText(this, "리뷰 등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                println(throwable)
+            }
+        )
     }
 }
