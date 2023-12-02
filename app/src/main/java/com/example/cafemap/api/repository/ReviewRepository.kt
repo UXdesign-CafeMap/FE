@@ -15,8 +15,8 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ReviewRepository {
-    @POST("review/{post_id}")
-    fun createReview(@Path("post_id") postId: String, @Body request: CreateReviewRequest): Call<ApiResponse<CreateReviewResponse>>
+    @POST("review/")
+    fun createReview( @Body request: CreateReviewRequest): Call<ApiResponse<CreateReviewResponse>>
     @GET("/review/")
     fun getReview(
         @Query("cafeId")

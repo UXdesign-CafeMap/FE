@@ -6,7 +6,7 @@ import java.util.Date
 data class Review (
     @SerializedName("memberId") val memberId: Int,
     @SerializedName("reviewId") val reviewId: Int? = null,
-    @SerializedName("uploadData") val uploadData: Date,
+    @SerializedName("uploadData") val uploadData: Date? = null,
     @SerializedName("content") val content: String,
     @SerializedName("imgUrlList") val imgUrlList: List<String>,
 
