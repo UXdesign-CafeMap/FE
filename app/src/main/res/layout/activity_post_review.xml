@@ -108,7 +108,7 @@
 
         <!-- 등록하기 버튼-->
         <Button
-            android:id="@+id/btn_pr_submit"
+            android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
