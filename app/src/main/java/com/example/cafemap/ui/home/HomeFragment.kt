@@ -1,20 +1,15 @@
 package com.example.cafemap.ui.home
 
-import android.Manifest
-import android.annotation.SuppressLint
-import android.content.Context
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -22,12 +17,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cafemap.R
-import com.example.cafemap.api.model.domain.Cafe
-import com.example.cafemap.api.model.dto.MarkerCafeResponse
 import com.example.cafemap.api.service.ListService
 import com.example.cafemap.databinding.FragmentHomeBinding
 import com.example.cafemap.ui.cafe.CafeDetailActivity
-import com.example.cafemap.ui.cafe.SearchCafeAdapter
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -44,6 +36,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private lateinit var userService: ListService
     private lateinit var mMap: GoogleMap
     private lateinit var nearCafeViewModel: NearCafeViewModel
+
+    private var shortAnimationDuration: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -194,25 +188,41 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         })
 
-        binding.tvHomeLabel.visibility = View.GONE
-        binding.vHomeLine.visibility = View.GONE
-        binding.rvHome.visibility = View.GONE
+//        binding.clHomeList.visibility = View.GONE
+//        binding.clHomeNearCafe.visibility = View.VISIBLE
+        crossFade(binding.clHomeNearCafe, binding.clHomeList)
 
-        binding.clHomeNearCafe.visibility = View.VISIBLE
         binding.clHomeNearCafe.setOnClickListener() {
             val i = Intent(requireContext(), CafeDetailActivity::class.java)
             i.putExtra("cafeId", cafeId)
             startActivity(i)
         }
-
+        crossFade(binding.clHomeNearCafe, binding.clHomeList)
     }
 
     fun restoreOriginalView() {
-        binding.tvHomeLabel.visibility = View.VISIBLE
-        binding.vHomeLine.visibility = View.VISIBLE
-        binding.rvHome.visibility = View.VISIBLE
+//        binding.clHomeList.visibility = View.VISIBLE
+//        binding.clHomeNearCafe.visibility = View.GONE
+        crossFade(binding.clHomeList, binding.clHomeNearCafe)
+    }
 
-        binding.clHomeNearCafe.visibility = View.GONE
+    fun crossFade(fadeInLayout: ConstraintLayout, fadeOutLayout: ConstraintLayout) {
+        shortAnimationDuration = resources.getInteger(android.R.integer.config_shortAnimTime)
 
+        fadeInLayout.apply {
+            alpha = 0f
+            visibility = View.VISIBLE
+            animate().alpha(1f)
+                .setDuration(shortAnimationDuration.toLong())
+                .setListener(null)
+        }
+
+        fadeOutLayout.animate().alpha(0f)
+            .setDuration(shortAnimationDuration.toLong())
+            .setListener(object: AnimatorListenerAdapter(){
+                override fun onAnimationEnd(animation: Animator) {
+                    fadeOutLayout.visibility = View.GONE
+                }
+            })
     }
 }
