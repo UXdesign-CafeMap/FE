@@ -29,8 +29,8 @@ interface ListRepository {
     // 해당 마커 카페 조회
     @GET("/cafe/marker")
     fun getCafeMarker(
-        @Query("locationRequest")
-        locationRequest: LocationRequest
+        @Query("longitude") longitude: Double,
+        @Query("latitude") latitude: Double
     ): Call<BaseResponse<MarkerCafeResponse>>
 
     // 카페 이름 검색
