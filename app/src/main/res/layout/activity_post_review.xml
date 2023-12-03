@@ -91,6 +91,7 @@
             android:maxLength="1000"
             android:padding="22dp"/>
 
+        <!-- 리뷰 텍스트 카운트 -->
         <TextView
             android:id="@+id/tv_pr_text_count"
             android:layout_width="wrap_content"

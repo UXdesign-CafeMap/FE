@@ -3,6 +3,8 @@ package com.example.cafemap.ui.cafe
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -14,10 +16,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cafemap.R
 import com.example.cafemap.api.model.domain.Review
+import com.example.cafemap.api.service.ReviewService
 import com.example.cafemap.databinding.ActivityPostReviewBinding
 import com.google.firebase.storage.FirebaseStorage
 import java.util.UUID
-import com.example.cafemap.api.service.ReviewService
 
 
 class PostReviewActivity : AppCompatActivity() {
@@ -26,6 +28,7 @@ class PostReviewActivity : AppCompatActivity() {
     private lateinit var submitButton: Button
     lateinit var _binding: ActivityPostReviewBinding
     private lateinit var reviewService: ReviewService
+
     private val binding: ActivityPostReviewBinding get() = _binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +43,17 @@ class PostReviewActivity : AppCompatActivity() {
         binding.addPhoto.setOnClickListener { openGallery() }
         binding.backButton.setOnClickListener { finish() }
         binding.submitButton.setOnClickListener { onClickSubmit() }
+
+        binding.reviewText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                binding.tvPrTextCount.setText(s.length.toString()+"/1000")
+            }
+            override fun afterTextChanged(s: Editable) {}
+        })
     }
+
+
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -115,6 +128,16 @@ class PostReviewActivity : AppCompatActivity() {
     private fun Int.dpToPx(): Int = (this * resources.displayMetrics.density).toInt()
 
     private fun onClickSubmit() {
+        // validation
+        if (binding.reviewText.text.toString().isEmpty()) {
+            Toast.makeText(this, "리뷰를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (binding.reviewText.text.toString().length > 1000) {
+            Toast.makeText(this, "리뷰는 1000자 이내로 작성해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         reviewService.createReview(
             review = Review(
                 memberId = 1,
