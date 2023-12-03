@@ -2,6 +2,8 @@ package com.example.cafemap.api.service
 
 import com.example.cafemap.api.ApiResponse
 import com.example.cafemap.api.RetrofitClient.authRepository
+import com.example.cafemap.api.RetrofitClient.nicknameRepository
+import com.example.cafemap.api.model.dto.NicknameDto
 import com.example.cafemap.api.model.dto.SignInRequest
 import com.example.cafemap.api.model.dto.SignInResponse
 import com.example.cafemap.api.model.dto.SignUpRequest
@@ -12,20 +14,35 @@ import retrofit2.Response
 
 object AuthService {
     fun signUp(email: String, password: String,  onSuccess: (SignUpResponse) -> Unit = {},  onFailure: (Throwable) -> Unit = {}) {
-        val request = SignUpRequest(email, password)
-        authRepository.signUp(request).enqueue(object : Callback<ApiResponse<SignUpResponse>> {
-            override fun onResponse(call: Call<ApiResponse<SignUpResponse>>, response: Response<ApiResponse<SignUpResponse>>) {
+
+        nicknameRepository.getRandomNickname("json", 1, 8).enqueue(object : Callback<NicknameDto> {
+            override fun onResponse(call: Call<NicknameDto>, response: Response<NicknameDto>) {
                 if (response.isSuccessful) {
-                    response.body()?.result?.let(onSuccess)
+                    val signUpRequest = SignUpRequest(email,
+                        response.body()?.words?.get(0) ?: "-",
+                        password)
+                    authRepository.signUp(signUpRequest).enqueue(object : Callback<ApiResponse<SignUpResponse>> {
+                        override fun onResponse(call: Call<ApiResponse<SignUpResponse>>, response: Response<ApiResponse<SignUpResponse>>) {
+                            if (response.isSuccessful) {
+                                response.body()?.result?.let(onSuccess)
+                            } else {
+                                onFailure(RuntimeException("Failed to sign up"))
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ApiResponse<SignUpResponse>>, t: Throwable) {
+                            onFailure(t)
+                        }
+                    })
                 } else {
-                    onFailure(RuntimeException("Failed to sign up"))
+                    onFailure(RuntimeException("Failed to get random nickname"))
                 }
             }
-
-            override fun onFailure(call: Call<ApiResponse<SignUpResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<NicknameDto>, t: Throwable) {
                 onFailure(t)
             }
         })
+
     }
 
     fun signIn( email: String, password: String, onSuccess: (SignInResponse) -> Unit = {}, onFailure: (Throwable) -> Unit = {}) {

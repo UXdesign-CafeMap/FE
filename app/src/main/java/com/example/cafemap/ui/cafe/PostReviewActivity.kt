@@ -24,15 +24,22 @@ import java.util.UUID
 
 class PostReviewActivity : AppCompatActivity() {
     private val PICK_IMAGE_REQUEST = 1
-    private val uploadedImageUrls = ArrayList<String>() // 업로드된 이미지 URL을 저장할 리스트
-    private lateinit var submitButton: Button
-    lateinit var _binding: ActivityPostReviewBinding
-    private lateinit var reviewService: ReviewService
 
+    // variables
+    private lateinit var reviewService: ReviewService
+    private var cafeId = -1
+    private val uploadedImageUrls = ArrayList<String>() // 업로드된 이미지 URL을 저장할 리스트
+
+    // View Binding
+    lateinit var _binding: ActivityPostReviewBinding
     private val binding: ActivityPostReviewBinding get() = _binding
+    private lateinit var submitButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        cafeId = intent.getIntExtra("cafeId", -1)
+
         _binding = ActivityPostReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -53,15 +60,12 @@ class PostReviewActivity : AppCompatActivity() {
         })
     }
 
-
-
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -141,13 +145,17 @@ class PostReviewActivity : AppCompatActivity() {
         reviewService.createReview(
             review = Review(
                 memberId = 1,
-                cafeId = 1,
+                cafeId = cafeId,
                 imgUrlList = uploadedImageUrls,
                 content = binding.reviewText.text.toString(),
             ),
             onSuccess = { response ->
                 Toast.makeText(this, "리뷰가 등록되었습니다.", Toast.LENGTH_SHORT).show()
                 finish()
+                val intent = Intent(this, ReviewListActivity::class.java)
+                // console cafeId
+                println(cafeId)
+                intent.putExtra("cafeId", cafeId)
             },
             onFailure = { throwable ->
                 Toast.makeText(this, "리뷰 등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
