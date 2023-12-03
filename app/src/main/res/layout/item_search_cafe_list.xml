@@ -50,7 +50,6 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="3dp"
             android:text="180m"
-            android:layout_marginLeft="10dp"
             android:fontFamily="@font/gothic_light"
             android:textSize="12dp"
             android:textColor="@color/SUB_400"/>
