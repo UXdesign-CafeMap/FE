@@ -14,10 +14,10 @@ import retrofit2.Response
 
 object AuthService {
     fun signUp(email: String, password: String,  onSuccess: (SignUpResponse) -> Unit = {},  onFailure: (Throwable) -> Unit = {}) {
-
         nicknameRepository.getRandomNickname("json", 1, 8).enqueue(object : Callback<NicknameDto> {
             override fun onResponse(call: Call<NicknameDto>, response: Response<NicknameDto>) {
                 if (response.isSuccessful) {
+                    println(response.body())
                     val signUpRequest = SignUpRequest(email,
                         response.body()?.words?.get(0) ?: "-",
                         password)
@@ -26,23 +26,21 @@ object AuthService {
                             if (response.isSuccessful) {
                                 response.body()?.result?.let(onSuccess)
                             } else {
-                                onFailure(RuntimeException("Failed to sign up"))
+                                onFailure(RuntimeException(response.body()?.message))
                             }
                         }
-
                         override fun onFailure(call: Call<ApiResponse<SignUpResponse>>, t: Throwable) {
                             onFailure(t)
                         }
                     })
                 } else {
-                    onFailure(RuntimeException("Failed to get random nickname"))
+                    onFailure(RuntimeException("Failed to get random nickname: " + response.body()))
                 }
             }
             override fun onFailure(call: Call<NicknameDto>, t: Throwable) {
                 onFailure(t)
             }
         })
-
     }
 
     fun signIn( email: String, password: String, onSuccess: (SignInResponse) -> Unit = {}, onFailure: (Throwable) -> Unit = {}) {
@@ -52,10 +50,9 @@ object AuthService {
                 if (response.isSuccessful) {
                     response.body()?.result?.let(onSuccess)
                 } else {
-                    onFailure(RuntimeException("Failed to sign in"))
+                    onFailure(RuntimeException(response.body()?.message))
                 }
             }
-
             override fun onFailure(call: Call<ApiResponse<SignInResponse>>, t: Throwable) {
                 onFailure(t)
             }

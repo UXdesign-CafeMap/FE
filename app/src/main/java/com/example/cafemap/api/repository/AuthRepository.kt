@@ -12,6 +12,6 @@ import retrofit2.http.POST
 interface AuthRepository {
     @POST("member/signup")
     fun signUp(@Body request: SignUpRequest): Call<ApiResponse<SignUpResponse>>
-    @POST("member/signin")
+    @POST("member/login")
     fun signIn(@Body request: SignInRequest): Call<ApiResponse<SignInResponse>>
 }

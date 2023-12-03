@@ -17,12 +17,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.cafemap.R
 import com.example.cafemap.api.model.domain.Review
 import com.example.cafemap.api.service.ReviewService
-import com.example.cafemap.databinding.ActivityPostReviewBinding
+import com.example.cafemap.databinding.ActivityWriteReviewBinding
 import com.google.firebase.storage.FirebaseStorage
 import java.util.UUID
 
 
-class PostReviewActivity : AppCompatActivity() {
+class WriteReviewActivity : AppCompatActivity() {
     private val PICK_IMAGE_REQUEST = 1
 
     // variables
@@ -31,8 +31,8 @@ class PostReviewActivity : AppCompatActivity() {
     private val uploadedImageUrls = ArrayList<String>() // 업로드된 이미지 URL을 저장할 리스트
 
     // View Binding
-    lateinit var _binding: ActivityPostReviewBinding
-    private val binding: ActivityPostReviewBinding get() = _binding
+    lateinit var _binding: ActivityWriteReviewBinding
+    private val binding: ActivityWriteReviewBinding get() = _binding
     private lateinit var submitButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class PostReviewActivity : AppCompatActivity() {
 
         cafeId = intent.getIntExtra("cafeId", -1)
 
-        _binding = ActivityPostReviewBinding.inflate(layoutInflater)
+        _binding = ActivityWriteReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         reviewService = ReviewService

@@ -63,20 +63,19 @@ class SignInActivity : AppCompatActivity() {
             , onSuccess = { data ->
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
 
-                // SharedPreferences를 사용하여 사용자 ID 저장
-                val sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
-                val editor = sharedPreferences.edit()
-                editor.putString("memberId", data.memberId.toString())
+                // SharedPreferences를 사용하여 사용자 memberId, email, nickname 저장
+                val sp = getSharedPreferences("pref", MODE_PRIVATE)
+                val editor = sp.edit()
+                editor.putInt("memberId", data.memberId)
+                editor.putString("email", data.email)
+                editor.putString("nickname", data.nickname)
                 editor.apply()
 
                 val mainIntent = Intent(this@SignInActivity, MainActivity::class.java)
                 startActivity(mainIntent)
             }
-            , onFailure = {
-                Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
-                // XXX: 로그인 api 구현하면 intent 빼야함
-                val mainIntent = Intent(this@SignInActivity, MainActivity::class.java)
-                startActivity(mainIntent)
+            , onFailure = { t ->
+                Toast.makeText(this, t.message, Toast.LENGTH_SHORT).show()
             }
         )
     }

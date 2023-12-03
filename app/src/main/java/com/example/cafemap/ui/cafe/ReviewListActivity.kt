@@ -2,12 +2,9 @@ package com.example.cafemap.ui.cafe
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cafemap.api.getCafeId
-import com.example.cafemap.api.service.ListService
 import com.example.cafemap.api.service.ReviewService
 import com.example.cafemap.databinding.ActivityReviewListBinding
 
@@ -50,7 +47,7 @@ class ReviewListActivity : AppCompatActivity() {
             finish()
         }
         binding.fabRlAdd.setOnClickListener {
-            val i = Intent(applicationContext, PostReviewActivity::class.java)
+            val i = Intent(applicationContext, WriteReviewActivity::class.java)
             i.putExtra("cafeId", cafeId)
             startActivity(i)
         }

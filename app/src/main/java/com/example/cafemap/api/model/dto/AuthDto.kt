@@ -25,5 +25,9 @@ data class SignInRequest(
 
 data class SignInResponse(
     @SerializedName("memberId")
-    val memberId: Int
+    val memberId: Int,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("nickname")
+    val nickname: String
 )
