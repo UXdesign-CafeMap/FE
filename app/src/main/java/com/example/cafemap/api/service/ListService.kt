@@ -81,8 +81,8 @@ object ListService {
     fun getDetailMenusViewModel() : MenuListViewModel {
         return detailMenus
     }
-    fun getCafeMarker(location: LocationRequest){
-        userRepository.getCafeMarker(location).enqueue(object: Callback<BaseResponse<MarkerCafeResponse>>{
+    fun getCafeMarker(longitude: Double, latitude: Double){
+        userRepository.getCafeMarker(longitude, latitude).enqueue(object: Callback<BaseResponse<MarkerCafeResponse>>{
             override fun onResponse(
                 call: Call<BaseResponse<MarkerCafeResponse>>,
                 response: Response<BaseResponse<MarkerCafeResponse>>
@@ -92,6 +92,7 @@ object ListService {
                     response.body()?.result?.let {
                         if (it != null) {
 //                            searchCafes.setSearchCafe(it)
+                            Log.d("seohyunMarkerAPI", response.body()!!.result.name.toString())
                         }
                     }
                 } else {

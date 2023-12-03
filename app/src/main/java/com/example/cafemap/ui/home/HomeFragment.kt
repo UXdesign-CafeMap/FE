@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cafemap.R
+import com.example.cafemap.api.model.domain.Cafe
 import com.example.cafemap.api.service.ListService
 import com.example.cafemap.databinding.FragmentHomeBinding
 import com.example.cafemap.ui.cafe.CafeDetailActivity
@@ -39,6 +40,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var userService: ListService
     private lateinit var mMap: GoogleMap
+    private lateinit var cafeList: List<Cafe>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -108,7 +110,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             when (clickedMarker.tag) {
                 1 -> {
                     Log.d("seohyunMarker",clickedMarker.tag.toString())
-                    updateNearCafe(1)
+                    // 클릭된 마커의 위치 정보
+                    val clickedLatLng = clickedMarker.position
+                    updateNearCafe(clickedLatLng.longitude, clickedLatLng.latitude)
                 }
                 2 -> {
 
@@ -122,12 +126,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cafe1, 14f))
     }
 
-    fun updateNearCafe(tag: Int) {
+    fun updateNearCafe(longitude: Double, latitude: Double) {
+        // 마커 카페 정보 가져오기
+        userService.getCafeMarker(longitude, latitude)
+
         binding.tvHomeLabel.visibility = View.GONE
         binding.vHomeLine.visibility = View.GONE
         binding.rvHome.visibility = View.GONE
 
         binding.clHomeNearCafe.visibility = View.VISIBLE
+
+        binding.nearCafeName.text =
 //        id가 tag인 cafe 불러와서 text랑 기타 등등.. 세팅
 //        binding.nearCafeName.text =
     }
