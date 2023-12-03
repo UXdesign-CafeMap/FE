@@ -90,6 +90,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        // 클릭된 marker의 위치 정보
+        var selectedMarkerPosition: LatLng? = null
 
         // cafeId = 1
         val cafe1 = LatLng(37.542, 127.070899)
@@ -114,8 +116,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 1 -> {
                     Log.d("seohyunMarker",clickedMarker.tag.toString())
                     // 클릭된 마커의 위치 정보
-                    val clickedLatLng = clickedMarker.position
-                    updateNearCafe(clickedLatLng.longitude, clickedLatLng.latitude)
+                    selectedMarkerPosition = clickedMarker.position
+                    updateNearCafe(selectedMarkerPosition!!.longitude, selectedMarkerPosition!!.latitude)
                 }
                 2 -> {
 
@@ -124,12 +126,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             true
         }
         // 다른 곳 클릭하면 레이아웃 원래대로 복구.. 어케 함?
+        googleMap.setOnMapClickListener { clickedLatLng ->
+            selectedMarkerPosition = null
+            restoreOriginalView()
+            true
+        }
 
         // 위치 초기화 (기준은 cafeId = 1)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cafe1, 14f))
     }
 
-    @SuppressLint("ResourceAsColor")
+
     fun updateNearCafe(longitude: Double, latitude: Double) {
         var cafeId = 0
         // 마커 카페 정보 가져오기
@@ -155,16 +162,28 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 val densColor = nearCafeDense
                 if (dens <= 30) {
                     densText.text = "여유"
-                    densColor.setCardBackgroundColor(R.color.DENS_100)
+                    densColor.setCardBackgroundColor(ContextCompat.getColor(
+                        requireContext(),
+                        R.color.DENS_100
+                    ))
                 } else if (dens <= 60) {
                     densText.text = "보통"
-                    densColor.setCardBackgroundColor(R.color.DENS_200)
+                    densColor.setCardBackgroundColor(ContextCompat.getColor(
+                        requireContext(),
+                        R.color.DENS_200
+                    ))
                 } else if (dens <= 90) {
                     densText.text = "혼잡"
-                    densColor.setCardBackgroundColor(R.color.DENS_300)
+                    densColor.setCardBackgroundColor(ContextCompat.getColor(
+                        requireContext(),
+                        R.color.DENS_300
+                    ))
                 } else {
                     densText.text = "만석"
-                    densColor.setCardBackgroundColor(R.color.DENS_400)
+                    densColor.setCardBackgroundColor(ContextCompat.getColor(
+                        requireContext(),
+                        R.color.DENS_400
+                    ))
                 }
 
                 nearCafeOpenHours.text = markerCafeResponse.onpeningHours
@@ -185,6 +204,15 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             i.putExtra("cafeId", cafeId)
             startActivity(i)
         }
+
+    }
+
+    fun restoreOriginalView() {
+        binding.tvHomeLabel.visibility = View.VISIBLE
+        binding.vHomeLine.visibility = View.VISIBLE
+        binding.rvHome.visibility = View.VISIBLE
+
+        binding.clHomeNearCafe.visibility = View.GONE
 
     }
 }

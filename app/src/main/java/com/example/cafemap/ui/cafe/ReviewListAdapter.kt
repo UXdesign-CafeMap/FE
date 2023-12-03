@@ -24,10 +24,13 @@ class ReviewListAdapter() : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>()
             binding.tvCrProfileName.text = item.memberId.toString()
             binding.tvCrProfileDetail.text = "리뷰 " + item.memberId + " | " + item.uploadData
             binding.tvCrReviewContent.text = item.content
-            binding.tvCrSeeMore.setOnClickListener {
-                binding.tvCrSeeMore.visibility = View.GONE
-                binding.tvCrReviewContent.ellipsize = null
-                binding.tvCrReviewContent.maxLines = Int.MAX_VALUE
+            if (binding.tvCrReviewContent.lineCount > 3){
+                binding.tvCrSeeMore.visibility = View.VISIBLE
+                binding.tvCrSeeMore.setOnClickListener {
+                    binding.tvCrSeeMore.visibility = View.GONE
+                    binding.tvCrReviewContent.ellipsize = null
+                    binding.tvCrReviewContent.maxLines = Int.MAX_VALUE
+                }
             }
         }
     }

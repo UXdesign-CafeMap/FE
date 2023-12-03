@@ -129,7 +129,6 @@
                                 android:layout_marginTop="17dp"
                                 app:layout_constraintLeft_toRightOf="@id/near_cafe_img"
                                 app:layout_constraintTop_toBottomOf="@id/near_cafe_name"
-                                android:backgroundTint="@color/BK"
                                 app:cardCornerRadius="20dp" />
 
                             <TextView
@@ -141,19 +140,6 @@
                                 app:layout_constraintLeft_toRightOf="@id/near_cafe_dense"
                                 app:layout_constraintTop_toBottomOf="@id/near_cafe_name"
                                 android:text="보통"
-                                android:fontFamily="@font/gothic_regular"
-                                android:textSize="16dp"
-                                android:textColor="@color/SUB_600"/>
-
-                            <TextView
-                                android:id="@+id/near_cafe_seat_label"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="14dp"
-                                app:layout_constraintLeft_toRightOf="@id/near_cafe_dense_label"
-                                app:layout_constraintTop_toBottomOf="@id/near_cafe_name"
-                                android:text="| 좌석 현황 : "
                                 android:fontFamily="@font/gothic_regular"
                                 android:textSize="16dp"
                                 android:textColor="@color/SUB_600"/>

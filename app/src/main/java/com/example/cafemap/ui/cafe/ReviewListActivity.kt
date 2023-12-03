@@ -29,22 +29,6 @@ class ReviewListActivity : AppCompatActivity() {
         cafeId = intent.getIntExtra("cafeId", -1)
         initLayout()
 
-//        RetrofitUtil.getRetrofitUtil().getProofPosts(challengeId).enqueue(object : Callback<GetProofPostsResponse> {
-//            override fun onResponse(
-//                call: Call<GetProofPostsResponse>,
-//                response: Response<GetProofPostsResponse>
-//            ) {
-//                if(response.isSuccessful) {
-//                    recordViewModel.addRecords(response.body()!!.proofPosts)
-//                } else {
-//                    Log.d("seohyun", response.errorBody().toString())
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<GetProofPostsResponse>, t: Throwable) {
-//                Log.d("seohyun", t.message.toString())
-//            }
-
         }
 
     fun initLayout() {
