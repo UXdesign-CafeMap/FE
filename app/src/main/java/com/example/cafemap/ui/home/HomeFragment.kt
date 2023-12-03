@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -11,6 +13,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +27,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -80,21 +85,37 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        val SEOUL = LatLng(37.556, 126.97)
+        // cafeId = 1
+        val cafe1 = LatLng(37.542, 127.070899)
 
-        val markerOptions = MarkerOptions()
-        markerOptions.position(SEOUL)
-        markerOptions.title("서울")
-        markerOptions.snippet("한국 수도")
+        val marker1 = MarkerOptions()
+        marker1.position(cafe1)
+        marker1.title("마우스래빗")
 
-        mMap.addMarker(markerOptions)
+        val drawable = ResourcesCompat.getDrawable(resources, R.drawable.marker_400, null)
+        val bitmap = drawable?.toBitmap()
+        val marker1Img = bitmap?.let { Bitmap.createScaledBitmap(it, 78, 96, false) }
+        marker1.icon(marker1Img?.let { BitmapDescriptorFactory.fromBitmap(it) })
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 10f))
-        setLocationUpdates()
+        // map에 marker들 추가
+        mMap.addMarker(marker1)
+
+        // 각 marker에 click event 설정
+        googleMap.setOnMarkerClickListener { clickedMarker ->
+            // 클릭된 마커 처리
+            if(clickedMarker == marker1){
+
+            }
+            false
+        }
+
+        // 위치 초기화 (기준은 cafeId = 1)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cafe1, 14f))
+        setCurrentLocation()
 
     }
 
-    fun setLocationUpdates(){
+    fun setCurrentLocation(){
         val lm = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
