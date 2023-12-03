@@ -10,6 +10,7 @@ import com.example.cafemap.api.model.dto.MarkerCafeResponse
 import com.example.cafemap.ui.cafe.CafeDetailViewModel
 import com.example.cafemap.ui.cafe.MenuListViewModel
 import com.example.cafemap.ui.cafe.SearchCafeViewModel
+import com.example.cafemap.ui.home.NearCafeViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +19,8 @@ object ListService {
     private val userRepository = RetrofitClient.searchRepository
 
     private val searchCafes = SearchCafeViewModel()
+    private val nearCafe = NearCafeViewModel()
+
     private val detailCafes = CafeDetailViewModel()
     private val detailMenus = MenuListViewModel()
 
@@ -81,6 +84,7 @@ object ListService {
     fun getDetailMenusViewModel() : MenuListViewModel {
         return detailMenus
     }
+
     fun getCafeMarker(longitude: Double, latitude: Double){
         userRepository.getCafeMarker(longitude, latitude).enqueue(object: Callback<BaseResponse<MarkerCafeResponse>>{
             override fun onResponse(
@@ -91,7 +95,7 @@ object ListService {
                 if (response.isSuccessful) {
                     response.body()?.result?.let {
                         if (it != null) {
-//                            searchCafes.setSearchCafe(it)
+                            nearCafe.setMarker(it)
                             Log.d("seohyunMarkerAPI", response.body()!!.result.name.toString())
                         }
                     }
@@ -106,6 +110,10 @@ object ListService {
             }
 
         })
+    }
+
+    fun getNearCafeViewModel(): NearCafeViewModel {
+        return nearCafe
     }
     fun searchCafe(){}
 

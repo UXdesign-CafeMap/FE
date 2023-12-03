@@ -158,19 +158,6 @@
                                 android:textSize="16dp"
                                 android:textColor="@color/SUB_600"/>
 
-                            <TextView
-                                android:id="@+id/near_cafe_seat"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginTop="14dp"
-                                app:layout_constraintLeft_toRightOf="@id/near_cafe_seat_label"
-                                app:layout_constraintTop_toBottomOf="@id/near_cafe_name"
-                                android:text="2 / 5"
-                                android:fontFamily="@font/gothic_regular"
-                                android:textSize="16dp"
-                                android:textColor="@color/SUB_600"/>
-
                             <ImageView
                                 android:id="@+id/near_cafe_ic_location"
                                 android:src="@drawable/ic_cd_location"

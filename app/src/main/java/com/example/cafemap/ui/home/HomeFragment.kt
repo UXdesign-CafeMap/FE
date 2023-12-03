@@ -1,6 +1,7 @@
 package com.example.cafemap.ui.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
@@ -21,6 +23,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cafemap.R
 import com.example.cafemap.api.model.domain.Cafe
+import com.example.cafemap.api.model.dto.MarkerCafeResponse
 import com.example.cafemap.api.service.ListService
 import com.example.cafemap.databinding.FragmentHomeBinding
 import com.example.cafemap.ui.cafe.CafeDetailActivity
@@ -40,7 +43,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var userService: ListService
     private lateinit var mMap: GoogleMap
-    private lateinit var cafeList: List<Cafe>
+    private lateinit var nearCafeViewModel: NearCafeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -126,18 +129,62 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cafe1, 14f))
     }
 
+    @SuppressLint("ResourceAsColor")
     fun updateNearCafe(longitude: Double, latitude: Double) {
+        var cafeId = 0
         // 마커 카페 정보 가져오기
         userService.getCafeMarker(longitude, latitude)
+
+        nearCafeViewModel = userService.getNearCafeViewModel()
+
+        nearCafeViewModel.markerCafe.observe(this, Observer {markerCafeResponse ->
+            cafeId = markerCafeResponse.cafeId
+
+            val totalSeat = markerCafeResponse.totalSeat
+            val remainSeat = markerCafeResponse.remainSeat
+            val totalMultiTap = markerCafeResponse.totalMultitap
+            val remainMultiTap = markerCafeResponse.remainMultitap
+
+            binding.apply {
+                nearCafeName.text = markerCafeResponse.name
+                nearCafeDistance.text = markerCafeResponse.distance
+                nearCafeLocation.text = markerCafeResponse.address
+
+                val dens = (remainSeat.toDouble() / totalSeat.toDouble()) * 100
+                val densText = nearCafeDenseLabel
+                val densColor = nearCafeDense
+                if (dens <= 30) {
+                    densText.text = "여유"
+                    densColor.setCardBackgroundColor(R.color.DENS_100)
+                } else if (dens <= 60) {
+                    densText.text = "보통"
+                    densColor.setCardBackgroundColor(R.color.DENS_200)
+                } else if (dens <= 90) {
+                    densText.text = "혼잡"
+                    densColor.setCardBackgroundColor(R.color.DENS_300)
+                } else {
+                    densText.text = "만석"
+                    densColor.setCardBackgroundColor(R.color.DENS_400)
+                }
+
+                nearCafeOpenHours.text = markerCafeResponse.onpeningHours
+                nearCafeSeats.text = remainSeat.toString() + '/' + totalSeat.toString()
+                nearCafeSeatsMultiTab.text = remainMultiTap.toString() + '/' + totalMultiTap.toString()
+                nearCafeVolume.text = markerCafeResponse.volume
+            }
+
+        })
 
         binding.tvHomeLabel.visibility = View.GONE
         binding.vHomeLine.visibility = View.GONE
         binding.rvHome.visibility = View.GONE
 
         binding.clHomeNearCafe.visibility = View.VISIBLE
+        binding.clHomeNearCafe.setOnClickListener() {
+            val i = Intent(requireContext(), CafeDetailActivity::class.java)
+            i.putExtra("cafeId", cafeId)
+            startActivity(i)
+        }
 
-        binding.nearCafeName.text =
-//        id가 tag인 cafe 불러와서 text랑 기타 등등.. 세팅
-//        binding.nearCafeName.text =
     }
 }

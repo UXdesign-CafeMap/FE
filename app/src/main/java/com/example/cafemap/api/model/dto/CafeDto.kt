@@ -62,7 +62,7 @@ data class MarkerCafeResponse (
     @SerializedName("remainMultitap") val remainMultitap: Int,
     @SerializedName("distance") val distance: String,
     @SerializedName("address") val address: String,
-    @SerializedName("openingHours") val openingHours: String,
+    @SerializedName("onpeningHours") val onpeningHours: String,
     @SerializedName("cafeImage") val cafeImage: String,
 )
 
