@@ -78,9 +78,8 @@ class SearchCafeFragment : Fragment() {
                         0 -> { //거리순
                             (binding.rvSc.adapter as SearchCafeAdapter).sortByDistance()
                         }
-
                         1 -> { //리뷰순
-
+                            (binding.rvSc.adapter as SearchCafeAdapter).sortByReview()
                         }
                     }
                 }

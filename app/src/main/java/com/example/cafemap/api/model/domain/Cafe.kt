@@ -9,4 +9,6 @@ data class Cafe (
     @SerializedName("distance") val distance: String,
     @SerializedName("review") val review: String,
     @SerializedName("cafeImage") val cafeImage: String,
+    @SerializedName("isOpen") val isOpen: String,
+    @SerializedName("reviewCount") val reviewCount: Int,
 )

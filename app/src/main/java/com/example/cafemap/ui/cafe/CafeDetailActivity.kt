@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.example.cafemap.api.service.ListService
 import com.example.cafemap.databinding.ActivityCafeDetailBinding
 
@@ -69,6 +70,10 @@ class CafeDetailActivity : AppCompatActivity() {
                 tvCdOpenHours.text = cafeDetailResponse.onpeningHours
                 tvCdSeats.text = remainSeat.toString() + '/' + totalSeat.toString()
                 tvCdSeatsMultiTab.text = remainMultiTap.toString() + '/' + totalMultiTap.toString()
+                Glide.with(this@CafeDetailActivity)
+                    .load(cafeDetailResponse.cafeImage)
+                    .into(ivCdImg)
+
 
                 rvCdMenus.layoutManager = GridLayoutManager(this@CafeDetailActivity, 2)
                 rvCdMenus.adapter = MenuListAdapter()

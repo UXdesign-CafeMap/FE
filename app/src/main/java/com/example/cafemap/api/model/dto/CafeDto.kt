@@ -63,6 +63,7 @@ data class MarkerCafeResponse (
     @SerializedName("distance") val distance: String,
     @SerializedName("address") val address: String,
     @SerializedName("onpeningHours") val onpeningHours: String,
+    @SerializedName("isOpen") val isOpen: String,
     @SerializedName("cafeImage") val cafeImage: String,
 )
 

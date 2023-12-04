@@ -1,9 +1,12 @@
 package com.example.cafemap.ui.home
 
 import android.view.LayoutInflater
+import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.cafemap.R
 import com.example.cafemap.api.model.domain.Cafe
 import com.example.cafemap.databinding.ItemHomeCafeListBinding
@@ -33,12 +36,32 @@ class HomeListAdapter() : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
                 tvHlCafeName.text = item.name
                 tvHlCafeDistance.text = item.distance
                 tvHlCafeSeat.text = remainSeat.toString() + '/' + totalSeat.toString()
+                Glide.with(itemView.context)
+                    .load(item.cafeImage)
+                    .into(ivHlImg)
+
             }
 
-            val dens = (remainSeat.toDouble() / totalSeat.toDouble()) * 100
+            val dens = ((totalSeat - remainSeat).toDouble() / totalSeat.toDouble()) * 100
             val densText = binding.tvHlCafeDenseLabel
             val densColor = binding.cvHlCafeDense
-            if (dens <= 30) {
+            if (item.isOpen == "휴무") {
+                densText.text = "휴무"
+                densColor.setCardBackgroundColor(ContextCompat.getColor(
+                    itemView.context,
+                    R.color.DENS_FFF
+                ))
+                binding.tvHlCafeSeat.visibility = GONE
+                binding.tvHlCafeSeatLabel.visibility = GONE
+            } else if (item.isOpen == "영업전") {
+                densText.text = "영업전"
+                densColor.setCardBackgroundColor(ContextCompat.getColor(
+                    itemView.context,
+                    R.color.DENS_FFF
+                ))
+                binding.tvHlCafeSeat.visibility = View.GONE
+                binding.tvHlCafeSeatLabel.visibility = View.GONE
+            } else if (dens <= 30) {
                 densText.text = "여유"
                 densColor.setCardBackgroundColor(
                     ContextCompat.getColor(
