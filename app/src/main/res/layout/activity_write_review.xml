@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/WH"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.cafe.PostReviewActivity">
+    tools:context=".ui.cafe.WriteReviewActivity">
 
         <ImageView
             android:id="@+id/back_button"

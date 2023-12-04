@@ -94,6 +94,7 @@ class CafeDetailActivity : AppCompatActivity() {
 
         binding.cvCdReviewContainer.setOnClickListener {
             var i = Intent(this, ReviewListActivity::class.java)
+            i.putExtra("cafeName", cafeViewModel.cafeDetail.value!!.name)
             i.putExtra("cafeId", cafeId)
             startActivity(i)
         }

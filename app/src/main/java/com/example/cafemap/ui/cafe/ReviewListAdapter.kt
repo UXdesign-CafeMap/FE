@@ -1,13 +1,14 @@
 package com.example.cafemap.ui.cafe
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.cafemap.api.model.domain.Review
 import com.example.cafemap.databinding.ItemCafeReviewBinding
+import java.text.SimpleDateFormat
 
 class ReviewListAdapter() : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>() {
 
@@ -21,8 +22,15 @@ class ReviewListAdapter() : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>()
     inner class ViewHolder(val binding: ItemCafeReviewBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item : Review) {
             Log.d("seohyunBinding", item.cafeId.toString())
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
             binding.tvCrProfileName.text = item.memberId.toString()
-            binding.tvCrProfileDetail.text = "리뷰 " + item.memberId + " | " + item.uploadData
+            binding.tvCrProfileDetail.text = "리뷰 " + item.memberId + " | " + dateFormat.format(item.uploadDate) // 2013-03-01 only date
+            println(item.reviewImgList)
+            if(item.reviewImgList != null && item.reviewImgList.isNotEmpty()){
+                Glide.with(itemView.context)
+                    .load(item.reviewImgList?.get(0))
+                    .into(binding.ivReviewImg)
+            }
             binding.tvCrReviewContent.text = item.content
             if (binding.tvCrReviewContent.lineCount > 3){
                 binding.tvCrSeeMore.visibility = View.VISIBLE

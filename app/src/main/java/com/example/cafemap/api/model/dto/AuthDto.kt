@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName
 data class SignUpRequest(
     @SerializedName("email")
     val email: String,
+    @SerializedName("nickname")
+    val nickname: String,
     @SerializedName("password")
     val password: String
 )
@@ -23,5 +25,9 @@ data class SignInRequest(
 
 data class SignInResponse(
     @SerializedName("memberId")
-    val memberId: Int
+    val memberId: Int,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("nickname")
+    val nickname: String
 )

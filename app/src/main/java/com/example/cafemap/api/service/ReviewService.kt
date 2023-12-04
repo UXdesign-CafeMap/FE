@@ -11,7 +11,6 @@ import com.example.cafemap.api.model.dto.CreateReviewResponse
 import com.example.cafemap.api.model.dto.GetReviewCountResponse
 import com.example.cafemap.api.model.dto.GetReviewResponse
 import com.example.cafemap.ui.cafe.ReviewViewModel
-import com.example.cafemap.ui.cafe.SearchCafeViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +24,7 @@ object ReviewService {
             memberId = review.memberId,
             cafeId = review.cafeId,
             content = review.content,
-            imgUrlList = review.imgUrlList
+            imgUrlList = review.reviewImgList
         )
 
         reviewRepository.createReview( createReviewRequest).enqueue(object : Callback<ApiResponse<CreateReviewResponse>> {

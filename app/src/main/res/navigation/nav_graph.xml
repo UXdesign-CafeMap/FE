@@ -41,7 +41,7 @@
         tools:layout="@layout/fragment_my_page" />
     <activity
         android:id="@+id/navigation_post_review"
-        android:name="com.example.cafemap.ui.cafe.PostReviewActivity"
+        android:name="com.example.cafemap.ui.cafe.WriteReviewActivity"
         android:label="Post Review"
-        tools:layout="@layout/activity_post_review" />
+        tools:layout="@layout/activity_write_review" />
 </navigation>

@@ -1,17 +1,17 @@
 package com.example.cafemap.ui.cafe
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cafemap.api.getCafeId
-import com.example.cafemap.api.service.ListService
 import com.example.cafemap.api.service.ReviewService
 import com.example.cafemap.databinding.ActivityReviewListBinding
 
 class ReviewListActivity : AppCompatActivity() {
+
     lateinit var _binding: ActivityReviewListBinding
     val binding : ActivityReviewListBinding get() = _binding
 
@@ -20,6 +20,7 @@ class ReviewListActivity : AppCompatActivity() {
     private lateinit var reviewsViewModel : ReviewViewModel
 
     private var cafeId = -1
+    private var cafeName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +28,26 @@ class ReviewListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         cafeId = intent.getIntExtra("cafeId", -1)
-        initLayout()
+        cafeName = intent.getStringExtra("cafeName").toString()
 
+        binding.tvRlCafeName.text = "<$cafeName> 리뷰"
+        initLayout()
+    }
+
+
+
+    private val writeReviewActivityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        println(result.resultCode)
+        if (result.resultCode == Activity.RESULT_OK) {
+            userService.getReview(cafeId)
         }
+    }
 
     fun initLayout() {
         userService = ReviewService
         userService.getReview(cafeId)
-//        Log.d("seohyunReview", cafeId.toString())
 
         binding.rvRl.layoutManager = LinearLayoutManager(this)
 
@@ -50,9 +63,9 @@ class ReviewListActivity : AppCompatActivity() {
             finish()
         }
         binding.fabRlAdd.setOnClickListener {
-            val i = Intent(applicationContext, PostReviewActivity::class.java)
-//            i.putExtra("")
-            startActivity(i)
+            val i = Intent(applicationContext, WriteReviewActivity::class.java)
+            i.putExtra("cafeId", cafeId)
+            writeReviewActivityResultLauncher.launch(i)
         }
     }
 }
