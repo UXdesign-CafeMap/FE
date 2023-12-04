@@ -66,18 +66,30 @@ class SearchCafeFragment : Fragment() {
         val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner, spinnerItems)
 
         binding.spSc.adapter = spinnerAdapter
-        binding.spSc.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                when(position) {
-                    0 -> { //거리순
-                        (binding.rvSc.adapter as SearchCafeAdapter).sortByDistance()
-                    }
-                    1 -> { //리뷰순
+        binding.spSc.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                view?.let {
+                    when (position) {
+                        0 -> { //거리순
+                            (binding.rvSc.adapter as SearchCafeAdapter).sortByDistance()
+                        }
 
+                        1 -> { //리뷰순
+
+                        }
                     }
                 }
             }
+            // spinner 선택하지 않은 경우
             override fun onNothingSelected(parent: AdapterView<*>) {
+                searchCafeViewModel.itemList.observe(viewLifecycleOwner, Observer {
+                    (binding.rvSc.adapter as SearchCafeAdapter).setData(it)
+                })
             }
         }
         binding.spSc.setSelection(0)

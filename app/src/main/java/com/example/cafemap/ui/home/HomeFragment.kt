@@ -78,6 +78,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         searchCafeViewModel.itemList.observe(viewLifecycleOwner, Observer {
             (binding.rvHome.adapter as HomeListAdapter).setData(it)
+            Log.d("whereareyou", it.toString())
         })
 
     }
@@ -87,39 +88,50 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         // 클릭된 marker의 위치 정보
         var selectedMarkerPosition: LatLng? = null
 
-        // cafeId = 1
+        val icon_400 = R.drawable.marker_400
+        val icon_300 = R.drawable.marker_300
+        val icon_200 = R.drawable.marker_200
+        val icon_100 = R.drawable.marker_100
+
+//        val marker1 = MarkerOptions()
+//        marker1.position(cafe1)
+//        marker1.title("마우스래빗")
+//
+//        val drawable1 = ResourcesCompat.getDrawable(resources, R.drawable.marker_400, null)
+//        val bitmap1 = drawable1?.toBitmap()
+//        val marker1Img = bitmap1?.let { Bitmap.createScaledBitmap(it, 78, 96, false) }
+//        marker1.icon(marker1Img?.let { BitmapDescriptorFactory.fromBitmap(it) })
+//
+//        // map에 marker들 추가
+//        val addedMarker1 = mMap.addMarker(marker1)
+//        addedMarker1?.tag = 1
         val cafe1 = LatLng(37.542, 127.070899)
+        addMarkerToMap(cafe1, "마우스래빗", icon_300, 1)
+        val cafe2 = LatLng(37.542398, 127.071304)
+        addMarkerToMap(cafe2, "투썸플레이스 건대입구점", icon_200, 2)
+        val cafe3 = LatLng(37.541743, 127.07091)
+        addMarkerToMap(cafe3, "카페 아르무아", icon_200, 3)
 
-        val marker1 = MarkerOptions()
-        marker1.position(cafe1)
-        marker1.title("마우스래빗")
-
-        val drawable1 = ResourcesCompat.getDrawable(resources, R.drawable.marker_400, null)
-        val bitmap1 = drawable1?.toBitmap()
-        val marker1Img = bitmap1?.let { Bitmap.createScaledBitmap(it, 78, 96, false) }
-        marker1.icon(marker1Img?.let { BitmapDescriptorFactory.fromBitmap(it) })
-
-        // map에 marker들 추가
-        val addedMarker1 = mMap.addMarker(marker1)
-        addedMarker1?.tag = 1
 
         // 각 marker에 click event 설정
         googleMap.setOnMarkerClickListener { clickedMarker ->
-            // tag에 따라 클릭된 마커 처리
-            when (clickedMarker.tag) {
-                1 -> {
-                    Log.d("seohyunMarker",clickedMarker.tag.toString())
-                    // 클릭된 마커의 위치 정보
-                    selectedMarkerPosition = clickedMarker.position
-                    updateNearCafe(selectedMarkerPosition!!.longitude, selectedMarkerPosition!!.latitude)
-                }
-                2 -> {
+//            // tag에 따라 클릭된 마커 처리
+//            when (clickedMarker.tag) {
+//                1 -> {
+//                    // 클릭된 마커의 위치 정보
+//                    selectedMarkerPosition = clickedMarker.position
+//                    updateNearCafe(selectedMarkerPosition!!.latitude, selectedMarkerPosition!!.longitude)
+//                }
+//                2 -> {
+//
+//                }
+//            }
+            selectedMarkerPosition = clickedMarker.position
+            updateNearCafe(selectedMarkerPosition!!.latitude, selectedMarkerPosition!!.longitude)
 
-                }
-            }
             true
         }
-        // 다른 곳 클릭하면 레이아웃 원래대로 복구.. 어케 함?
+        // 다른 곳 클릭하면 레이아웃 원래대로 복구
         googleMap.setOnMapClickListener { clickedLatLng ->
             selectedMarkerPosition = null
             restoreOriginalView()
@@ -127,11 +139,26 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
 
         // 위치 초기화 (기준은 cafeId = 1)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cafe1, 14f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cafe1, 15f))
+    }
+
+    private fun addMarkerToMap(cafeLocation: LatLng, cafeName: String, icon: Int, tag: Int) {
+        val marker = MarkerOptions()
+        marker.position(cafeLocation)
+        marker.title(cafeName)
+
+        val drawable = ResourcesCompat.getDrawable(resources, icon, null)
+        val bitmap = drawable?.toBitmap()
+        val markerImg = bitmap?.let { Bitmap.createScaledBitmap(it, 78, 96, false) }
+        marker.icon(markerImg?.let { BitmapDescriptorFactory.fromBitmap(it) })
+
+        // map에 marker 추가
+        val addedMarker = mMap.addMarker(marker)
+        addedMarker?.tag = tag
     }
 
 
-    fun updateNearCafe(longitude: Double, latitude: Double) {
+    fun updateNearCafe(latitude: Double, longitude: Double) {
         var cafeId = 0
         // 마커 카페 정보 가져오기
         userService.getCafeMarker(longitude, latitude)
