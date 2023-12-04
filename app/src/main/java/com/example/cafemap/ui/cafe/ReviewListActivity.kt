@@ -1,7 +1,9 @@
 package com.example.cafemap.ui.cafe
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +11,7 @@ import com.example.cafemap.api.service.ReviewService
 import com.example.cafemap.databinding.ActivityReviewListBinding
 
 class ReviewListActivity : AppCompatActivity() {
+
     lateinit var _binding: ActivityReviewListBinding
     val binding : ActivityReviewListBinding get() = _binding
 
@@ -27,6 +30,15 @@ class ReviewListActivity : AppCompatActivity() {
         initLayout()
 
         }
+
+    private val writeReviewActivityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        println(result.resultCode)
+        if (result.resultCode == Activity.RESULT_OK) {
+            userService.getReview(cafeId)
+        }
+    }
 
     fun initLayout() {
         userService = ReviewService
@@ -49,7 +61,7 @@ class ReviewListActivity : AppCompatActivity() {
         binding.fabRlAdd.setOnClickListener {
             val i = Intent(applicationContext, WriteReviewActivity::class.java)
             i.putExtra("cafeId", cafeId)
-            startActivity(i)
+            writeReviewActivityResultLauncher.launch(i)
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.cafemap.ui.cafe
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +14,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cafemap.R
 import com.example.cafemap.api.model.domain.Review
@@ -23,7 +25,6 @@ import java.util.UUID
 
 
 class WriteReviewActivity : AppCompatActivity() {
-    private val PICK_IMAGE_REQUEST = 1
 
     // variables
     private lateinit var reviewService: ReviewService
@@ -34,6 +35,26 @@ class WriteReviewActivity : AppCompatActivity() {
     lateinit var _binding: ActivityWriteReviewBinding
     private val binding: ActivityWriteReviewBinding get() = _binding
     private lateinit var submitButton: Button
+
+    private val galleryActivityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val data: Intent? = result.data
+            if (data?.clipData != null) {
+                // 여러 이미지 처리
+                val count = data.clipData!!.itemCount
+                for (i in 0 until count) {
+                    val imageUri = data.clipData!!.getItemAt(i).uri
+                    addImageToLayoutAndUpload(imageUri)
+                }
+            } else if (data?.data != null) {
+                // 단일 이미지 처리
+                val imageUri = data.data!!
+                addImageToLayoutAndUpload(imageUri)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,26 +82,11 @@ class WriteReviewActivity : AppCompatActivity() {
     }
 
     private fun openGallery() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "image/*"
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
-            if (data?.clipData != null) {
-                val count = data.clipData!!.itemCount
-                for (i in 0 until count) {
-                    val imageUri = data.clipData!!.getItemAt(i).uri
-                    addImageToLayoutAndUpload(imageUri)
-                }
-            } else if (data?.data != null) {
-                val imageUri = data.data!!
-                addImageToLayoutAndUpload(imageUri)
-            }
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "image/*"
+            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         }
+        galleryActivityResultLauncher.launch(Intent.createChooser(intent, "Select Picture"))
     }
 
     private fun addImageToLayoutAndUpload(imageUri: Uri) {
@@ -151,11 +157,8 @@ class WriteReviewActivity : AppCompatActivity() {
             ),
             onSuccess = { response ->
                 Toast.makeText(this, "리뷰가 등록되었습니다.", Toast.LENGTH_SHORT).show()
+                setResult(Activity.RESULT_OK)
                 finish()
-                val intent = Intent(this, ReviewListActivity::class.java)
-                // console cafeId
-                println(cafeId)
-                intent.putExtra("cafeId", cafeId)
             },
             onFailure = { throwable ->
                 Toast.makeText(this, "리뷰 등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
