@@ -36,8 +36,8 @@ interface ListRepository {
     // 카페 이름 검색
     @GET("/cafe/search")
     fun searchCafe(
-        @Query("searchRequest")
-        searchRequest: SearchRequest
+        @Query("search")
+        search: String
     ): Call<BaseResponse<CafeListResponse>>
 
 }

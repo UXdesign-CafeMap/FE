@@ -115,7 +115,31 @@ object ListService {
     fun getNearCafeViewModel(): NearCafeViewModel {
         return nearCafe
     }
-    fun searchCafe(){}
+    fun searchCafe(keyword: String){
+        userRepository.searchCafe(keyword).enqueue(object: Callback<BaseResponse<CafeListResponse>>{
+            override fun onResponse(
+                call: Call<BaseResponse<CafeListResponse>>,
+                response: Response<BaseResponse<CafeListResponse>>
+            ) {
+                // 서버 응답 처리
+                if (response.isSuccessful) {
+                    response.body()?.result?.cafeList.let {
+                        if (it != null) {
+                            searchCafes.setSearchCafe(it)
+                        }
+                    }
+                } else {
+                    Log.d("seohyun", response.errorBody().toString())
+                }
+
+            }
+
+            override fun onFailure(call: Call<BaseResponse<CafeListResponse>>, t: Throwable) {
+                Log.d("seohyun", t.message.toString())
+            }
+
+        })
+    }
 
 
 }
