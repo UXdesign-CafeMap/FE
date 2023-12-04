@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.SearchView
 import androidx.core.content.ContentProviderCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -93,5 +94,31 @@ class SearchCafeFragment : Fragment() {
         }
         binding.spSc.setSelection(0)
 
+        binding.svScSearchBar.setOnQueryTextListener(object: SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // 사용자가 검색 버튼을 눌렀을 때 호출됨
+                // query 매개변수에 검색어가 전달됨
+                // 원하는 검색 로직을 구현
+                if (query != null) {
+                    userService.searchCafe(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // 검색어가 변경될 때마다 호출됨
+                // newText 매개변수에 변경된 검색어가 전달됨
+                // 원하는 동적 검색 로직을 구현
+                if (newText != null) {
+                    userService.searchCafe(newText)
+                }
+                return true
+            }
+        })
     }
+
+//    private fun performSearch(query: String?) {
+//        adapter.filter(query)
+//    }
 }
