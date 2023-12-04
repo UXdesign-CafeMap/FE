@@ -166,7 +166,7 @@ class WriteReviewActivity : AppCompatActivity() {
             review = Review(
                 memberId = memberId,
                 cafeId = cafeId,
-                imgUrlList = uploadedImageUrls,
+                reviewImgList = uploadedImageUrls,
                 content = binding.reviewText.text.toString(),
             ),
             onSuccess = { response ->

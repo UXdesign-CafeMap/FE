@@ -20,6 +20,7 @@ class ReviewListActivity : AppCompatActivity() {
     private lateinit var reviewsViewModel : ReviewViewModel
 
     private var cafeId = -1
+    private var cafeName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +28,13 @@ class ReviewListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         cafeId = intent.getIntExtra("cafeId", -1)
+        cafeName = intent.getStringExtra("cafeName").toString()
+
+        binding.tvRlCafeName.text = "<$cafeName> 리뷰"
         initLayout()
-        }
+    }
+
+
 
     private val writeReviewActivityResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -42,7 +48,6 @@ class ReviewListActivity : AppCompatActivity() {
     fun initLayout() {
         userService = ReviewService
         userService.getReview(cafeId)
-//        Log.d("seohyunReview", cafeId.toString())
 
         binding.rvRl.layoutManager = LinearLayoutManager(this)
 
