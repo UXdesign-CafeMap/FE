@@ -25,6 +25,7 @@
             app:layout_constraintLeft_toLeftOf="parent">
 
             <ImageView
+                android:id="@+id/iv_hl_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_detail_menu"/>
@@ -98,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="12dp"
             app:layout_constraintLeft_toRightOf="@id/tv_hl_cafe_seat_label"
             app:layout_constraintTop_toBottomOf="@id/tv_hl_cafe_name"
             android:text="2 / 5"

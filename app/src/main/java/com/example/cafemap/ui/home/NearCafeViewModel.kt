@@ -9,7 +9,7 @@ class NearCafeViewModel : ViewModel() {
 
     private var cd = MarkerCafeResponse (
         0, "", "", 0,0,0,0,
-        "", "", "", ""
+        "", "", "", "",""
     )
     private val _markerCafe = MutableLiveData<MarkerCafeResponse>()
     val markerCafe : LiveData<MarkerCafeResponse> get() = _markerCafe

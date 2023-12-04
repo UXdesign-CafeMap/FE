@@ -43,6 +43,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
+<!--                        처음에 보이는 애들-->
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/cl_home_list"
                             android:layout_width="match_parent"
@@ -71,10 +72,11 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rv_home"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="0dp"
                                 android:layout_marginHorizontal="11dp"
                                 android:layout_marginTop="11dp"
-                                app:layout_constraintTop_toBottomOf="@id/v_home_line" />
+                                app:layout_constraintTop_toBottomOf="@id/v_home_line"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 <!--                        사라졌다가 나타날 애들-->
@@ -95,6 +97,7 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <ImageView
+                                    android:id="@+id/iv_near_cafe_img"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:src="@drawable/ic_cd_location" />
@@ -163,7 +166,7 @@
                                 android:id="@+id/near_cafe_location"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="11dp"
+                                android:layout_marginLeft="9dp"
                                 android:layout_marginTop="15dp"
                                 app:layout_constraintLeft_toRightOf="@id/near_cafe_ic_location"
                                 app:layout_constraintTop_toBottomOf="@id/near_cafe_img"
@@ -179,7 +182,7 @@
                                 android:layout_marginTop="15dp"
                                 app:contentPaddingTop="16dp"
                                 app:contentPaddingBottom="16dp"
-                                app:contentPaddingLeft="14dp"
+                                android:paddingHorizontal="3dp"
                                 app:layout_constraintTop_toBottomOf="@id/near_cafe_location"
                                 android:backgroundTint="@color/BR_100"
                                 app:cardCornerRadius="5dp"
@@ -193,8 +196,7 @@
                                         android:id="@+id/near_cafe_detail_container1"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:layout_marginRight="8dp">
+                                        android:layout_weight="1">
 
                                         <ImageView
                                             android:id="@+id/near_cafe_ic_open_hours"
@@ -225,7 +227,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="1dp"
                                             android:background="#D9D9D9"
-                                            android:layout_marginTop="8dp"
+                                            android:layout_marginTop="7dp"
                                             app:layout_constraintTop_toBottomOf="@id/near_cafe_open_hours_label"/>
 
                                         <TextView
@@ -238,7 +240,7 @@
                                             app:layout_constraintRight_toRightOf="parent"
                                             android:text="10 ~ 22시"
                                             android:fontFamily="@font/gothic_bold"
-                                            android:textSize="13dp"
+                                            android:textSize="12dp"
                                             android:textColor="@color/BK"/>
 
                                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -248,7 +250,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:layout_marginRight="8dp">
+                                        android:layout_marginLeft="3dp">
 
                                         <ImageView
                                             android:id="@+id/near_cafe_ic_seats"
@@ -263,7 +265,7 @@
                                             android:id="@+id/near_cafe_seats_label"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginTop="1dp"
+                                            android:layout_marginTop="3dp"
                                             app:layout_constraintRight_toRightOf="parent"
                                             app:layout_constraintLeft_toLeftOf="parent"
                                             app:layout_constraintTop_toBottomOf="@id/near_cafe_ic_seats"
