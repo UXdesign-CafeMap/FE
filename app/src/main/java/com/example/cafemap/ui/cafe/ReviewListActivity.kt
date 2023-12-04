@@ -28,7 +28,6 @@ class ReviewListActivity : AppCompatActivity() {
 
         cafeId = intent.getIntExtra("cafeId", -1)
         initLayout()
-
         }
 
     private val writeReviewActivityResultLauncher = registerForActivityResult(

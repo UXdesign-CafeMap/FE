@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -28,6 +30,7 @@ class WriteReviewActivity : AppCompatActivity() {
 
     // variables
     private lateinit var reviewService: ReviewService
+    private var memberId = -1
     private var cafeId = -1
     private val uploadedImageUrls = ArrayList<String>() // 업로드된 이미지 URL을 저장할 리스트
 
@@ -60,6 +63,9 @@ class WriteReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         cafeId = intent.getIntExtra("cafeId", -1)
+        //get member id from shared preference
+        val sp = getSharedPreferences("pref", MODE_PRIVATE)
+        memberId = sp.getInt("memberId", -1)
 
         _binding = ActivityWriteReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -135,6 +141,14 @@ class WriteReviewActivity : AppCompatActivity() {
             }
     }
 
+    // 화면 터치 시 키보드 내리기
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        val imm: InputMethodManager =
+            getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        return super.dispatchTouchEvent(ev)
+    }
+
     private fun Int.dpToPx(): Int = (this * resources.displayMetrics.density).toInt()
 
     private fun onClickSubmit() {
@@ -150,7 +164,7 @@ class WriteReviewActivity : AppCompatActivity() {
 
         reviewService.createReview(
             review = Review(
-                memberId = 1,
+                memberId = memberId,
                 cafeId = cafeId,
                 imgUrlList = uploadedImageUrls,
                 content = binding.reviewText.text.toString(),
