@@ -75,7 +75,7 @@ class SignInActivity : AppCompatActivity() {
                 startActivity(mainIntent)
             }
             , onFailure = { t ->
-                Toast.makeText(this, t.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
             }
         )
     }
