@@ -208,7 +208,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
 
         // 위치 초기화 (기준은 cafeId = 1)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cafe1, 15f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cafe1, 16f))
     }
 
 
