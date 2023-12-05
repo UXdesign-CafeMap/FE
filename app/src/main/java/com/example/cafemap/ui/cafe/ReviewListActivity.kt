@@ -65,6 +65,7 @@ class ReviewListActivity : AppCompatActivity() {
         binding.fabRlAdd.setOnClickListener {
             val i = Intent(applicationContext, WriteReviewActivity::class.java)
             i.putExtra("cafeId", cafeId)
+            i.putExtra("cafeName", cafeName)
             writeReviewActivityResultLauncher.launch(i)
         }
     }

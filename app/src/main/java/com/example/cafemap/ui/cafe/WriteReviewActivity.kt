@@ -33,6 +33,7 @@ class WriteReviewActivity : AppCompatActivity() {
     private var memberId = -1
     private var cafeId = -1
     private val uploadedImageUrls = ArrayList<String>() // 업로드된 이미지 URL을 저장할 리스트
+    private var cafeName = ""
 
     // View Binding
     lateinit var _binding: ActivityWriteReviewBinding
@@ -66,6 +67,7 @@ class WriteReviewActivity : AppCompatActivity() {
         //get member id from shared preference
         val sp = getSharedPreferences("pref", MODE_PRIVATE)
         memberId = sp.getInt("memberId", -1)
+        cafeName = intent.getStringExtra("cafeName").toString()
 
         _binding = ActivityWriteReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -77,6 +79,7 @@ class WriteReviewActivity : AppCompatActivity() {
         binding.addPhoto.setOnClickListener { openGallery() }
         binding.backButton.setOnClickListener { finish() }
         binding.submitButton.setOnClickListener { onClickSubmit() }
+        binding.tvPrCafeName.text = "<$cafeName> 리뷰쓰기"
 
         binding.reviewText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}

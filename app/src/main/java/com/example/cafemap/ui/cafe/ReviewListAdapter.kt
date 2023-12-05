@@ -23,8 +23,8 @@ class ReviewListAdapter() : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>()
         fun bind(item : Review) {
             Log.d("seohyunBinding", item.cafeId.toString())
             val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-            binding.tvCrProfileName.text = item.memberId.toString()
-            binding.tvCrProfileDetail.text = "리뷰 " + item.memberId + " | " + dateFormat.format(item.uploadDate) // 2013-03-01 only date
+            binding.tvCrProfileName.text = item.nickname
+            binding.tvCrProfileDetail.text = "리뷰 " + item.reviewCount + " | " + dateFormat.format(item.uploadDate) // 2013-03-01 only date
             println(item.reviewImgList)
             if(item.reviewImgList != null && item.reviewImgList.isNotEmpty()){
                 Glide.with(itemView.context)
